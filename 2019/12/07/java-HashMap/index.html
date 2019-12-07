@@ -53,10 +53,10 @@
 <meta property="og:site_name" content="嘚嘚的blog">
 <meta property="og:description" content="一、前言在leetcode-01-两数之和的题目中，提到了hash table 在查找方面提高时间复杂度的表现。本片文章是对hashmap进行详细的学习。 二、java中其他数据结构在新增和查找方面的表现 数组： 1.1 无序数组： 查找：时间复杂度时O(n) 新增：时间复杂度O(1)   1..2 有序数组 查找：使用二分查找，差值查找，斐波那契查找等方式，可将查找复杂度提高为O(logn)。但">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;07&#x2F;java-HashMap&#x2F;shao&#x2F;blog&#x2F;source&#x2F;_posts&#x2F;java-HashMap&#x2F;hashmap数组加链表结构.png">
-<meta property="og:updated_time" content="2019-12-07T11:26:38.919Z">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;07&#x2F;java-HashMap&#x2F;hashmap数组加链表结构.png">
+<meta property="og:updated_time" content="2019-12-07T11:46:13.899Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;07&#x2F;java-HashMap&#x2F;shao&#x2F;blog&#x2F;source&#x2F;_posts&#x2F;java-HashMap&#x2F;hashmap数组加链表结构.png">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;07&#x2F;java-HashMap&#x2F;hashmap数组加链表结构.png">
 
 <link rel="canonical" href="http://yoursite.com/2019/12/07/java-HashMap/">
 
@@ -210,7 +210,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2019-12-07 18:21:13 / Modified: 19:26:38" itemprop="dateCreated datePublished" datetime="2019-12-07T18:21:13+08:00">2019-12-07</time>
+              <time title="Created: 2019-12-07 18:21:13 / Modified: 19:46:13" itemprop="dateCreated datePublished" datetime="2019-12-07T18:21:13+08:00">2019-12-07</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -283,7 +283,7 @@
 <li><p>数据+链表的HashMap结构图</p>
 </li>
 </ol>
-<p><img src="/2019/12/07/java-HashMap/shao/blog/source/_posts/java-HashMap/hashmap数组加链表结构.png" alt></p>
+<p><img src="/2019/12/07/java-HashMap/hashmap数组加链表结构.png" alt="hashmap数组加链表结构"></p>
 <p>数组是hashmap的主体，链表是为了解决哈希冲突。如果定位到的数组位置不含链表（当前entry的next指向null）,那么查找，添加等操作很快，仅需一次寻址即可；如果定位到的数组包含链表，对于添加操作，其时间复杂度为O(n)，首先遍历链表，存在即覆盖，否则新增；对于查找操作来讲，仍需遍历链表，然后通过key对象的equals方法逐一比对查找。所以，性能考虑，<strong>HashMap中的链表出现越少，性能才会越好。</strong></p>
 <blockquote>
 <p>之后有介绍了hashmap在不同的构造器下，新增put和查找get的具体步骤,源码解析。目前还不需要了解这么深入。待进一步学习。</p>

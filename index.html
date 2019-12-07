@@ -205,7 +205,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2019-12-07 18:21:13 / Modified: 19:26:38" itemprop="dateCreated datePublished" datetime="2019-12-07T18:21:13+08:00">2019-12-07</time>
+              <time title="Created: 2019-12-07 18:21:13 / Modified: 19:46:13" itemprop="dateCreated datePublished" datetime="2019-12-07T18:21:13+08:00">2019-12-07</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -278,7 +278,7 @@
 <li><p>数据+链表的HashMap结构图</p>
 </li>
 </ol>
-<p><img src="/2019/12/07/java-HashMap/shao/blog/source/_posts/java-HashMap/hashmap数组加链表结构.png" alt></p>
+<p><img src="/2019/12/07/java-HashMap/hashmap数组加链表结构.png" alt="hashmap数组加链表结构"></p>
 <p>数组是hashmap的主体，链表是为了解决哈希冲突。如果定位到的数组位置不含链表（当前entry的next指向null）,那么查找，添加等操作很快，仅需一次寻址即可；如果定位到的数组包含链表，对于添加操作，其时间复杂度为O(n)，首先遍历链表，存在即覆盖，否则新增；对于查找操作来讲，仍需遍历链表，然后通过key对象的equals方法逐一比对查找。所以，性能考虑，<strong>HashMap中的链表出现越少，性能才会越好。</strong></p>
 <blockquote>
 <p>之后有介绍了hashmap在不同的构造器下，新增put和查找get的具体步骤,源码解析。目前还不需要了解这么深入。待进一步学习。</p>
