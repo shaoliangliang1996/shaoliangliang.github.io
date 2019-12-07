@@ -180,6 +180,131 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/07/java-HashMap/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="嘚嘚">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="嘚嘚的blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/12/07/java-HashMap/" class="post-title-link" itemprop="url">java-HashMap</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2019-12-07 18:21:13 / Modified: 19:26:38" itemprop="dateCreated datePublished" datetime="2019-12-07T18:21:13+08:00">2019-12-07</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index">
+                    <span itemprop="name">java学习</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a>一、前言</h2><p>在<a href="https://shaoliangliang1996.github.io/2019/12/07/leetcode之旅-01-两数之和/" target="_blank" rel="noopener">leetcode-01-两数之和</a>的题目中，提到了hash table 在查找方面提高时间复杂度的表现。本片文章是对hashmap进行详细的学习。</p>
+<h2 id="二、java中其他数据结构在新增和查找方面的表现"><a href="#二、java中其他数据结构在新增和查找方面的表现" class="headerlink" title="二、java中其他数据结构在新增和查找方面的表现"></a>二、java中其他数据结构在新增和查找方面的表现</h2><ol>
+<li>数组：<ul>
+<li>1.1 无序数组：<ul>
+<li>查找：时间复杂度时O(n)</li>
+<li>新增：时间复杂度O(1)</li>
+</ul>
+</li>
+<li>1..2 有序数组<ul>
+<li>查找：使用<font color="Chocolate" size="4">二分查找，差值查找，斐波那契查找</font>等方式，可将查找复杂度提高为O(logn)。但当实际需要插入删除操作时，由于涉及到数组元素的移动，平均时间复杂度为O(n)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>线性链表：<ul>
+<li>查找：O(n)</li>
+<li>新增: O(1) ,因为仅需引用变换，无序元素移动</li>
+</ul>
+</li>
+<li><p>二叉树：（本质：物理组织结构为链表）</p>
+<ul>
+<li>插入&amp;查找&amp;删除：O(logn)</li>
+</ul>
+</li>
+<li>哈希表：（本质：主干物理组织结构是数组）<ul>
+<li>查找：O(1)  当不存在哈希冲突时</li>
+</ul>
+</li>
+</ol>
+<h2 id="三、HashMap"><a href="#三、HashMap" class="headerlink" title="三、HashMap"></a>三、HashMap</h2><ol>
+<li><p>哈希函数和哈希冲突</p>
+<ul>
+<li><strong>HashMap利用哈希函数</strong>：hash表使用了数组的形式，当涉及到查找的时候，通过哈希函数计算的hash值，可以快速得到值对应的数组下标，定位到相应元素，时间复杂度为O(1)</li>
+<li><p><strong>解决哈希冲突</strong>：不可避免。哈希冲突的解决方案有多种:</p>
+<ul>
+<li>开放定址法（发生冲突，继续寻找下一块未被占用的存储地址）</li>
+<li>再散列函数法 ?</li>
+<li>链地址法 ?</li>
+</ul>
+<blockquote>
+<p>而HashMap即是采用了链地址法，也就是<font color="Chocolate" size="4">数组+链表</font>的方式</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>数据+链表的HashMap结构图</p>
+</li>
+</ol>
+<p><img src="/2019/12/07/java-HashMap/shao/blog/source/_posts/java-HashMap/hashmap数组加链表结构.png" alt></p>
+<p>数组是hashmap的主体，链表是为了解决哈希冲突。如果定位到的数组位置不含链表（当前entry的next指向null）,那么查找，添加等操作很快，仅需一次寻址即可；如果定位到的数组包含链表，对于添加操作，其时间复杂度为O(n)，首先遍历链表，存在即覆盖，否则新增；对于查找操作来讲，仍需遍历链表，然后通过key对象的equals方法逐一比对查找。所以，性能考虑，<strong>HashMap中的链表出现越少，性能才会越好。</strong></p>
+<blockquote>
+<p>之后有介绍了hashmap在不同的构造器下，新增put和查找get的具体步骤,源码解析。目前还不需要了解这么深入。待进一步学习。</p>
+</blockquote>
+<h2 id="参考列表"><a href="#参考列表" class="headerlink" title="参考列表"></a>参考列表</h2><ol>
+<li><a href="https://blog.csdn.net/woshimaxiao1/article/details/83661464" target="_blank" rel="noopener">深入浅出学Java——HashMap</a></li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/07/leetcode%E4%B9%8B%E6%97%85-01-%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -637,20 +762,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-count">5</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

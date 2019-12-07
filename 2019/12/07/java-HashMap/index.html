@@ -45,17 +45,20 @@
   };
 </script>
 
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+  <meta name="description" content="一、前言在leetcode-01-两数之和的题目中，提到了hash table 在查找方面提高时间复杂度的表现。本片文章是对hashmap进行详细的学习。 二、java中其他数据结构在新增和查找方面的表现 数组： 1.1 无序数组： 查找：时间复杂度时O(n) 新增：时间复杂度O(1)   1..2 有序数组 查找：使用二分查找，差值查找，斐波那契查找等方式，可将查找复杂度提高为O(logn)。但">
+<meta name="keywords" content="hashMap,java,源码解析">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;04&#x2F;hello-world&#x2F;index.html">
+<meta property="og:title" content="java-HashMap">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;07&#x2F;java-HashMap&#x2F;index.html">
 <meta property="og:site_name" content="嘚嘚的blog">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="一、前言在leetcode-01-两数之和的题目中，提到了hash table 在查找方面提高时间复杂度的表现。本片文章是对hashmap进行详细的学习。 二、java中其他数据结构在新增和查找方面的表现 数组： 1.1 无序数组： 查找：时间复杂度时O(n) 新增：时间复杂度O(1)   1..2 有序数组 查找：使用二分查找，差值查找，斐波那契查找等方式，可将查找复杂度提高为O(logn)。但">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-12-05T02:40:47.538Z">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;07&#x2F;java-HashMap&#x2F;shao&#x2F;blog&#x2F;source&#x2F;_posts&#x2F;java-HashMap&#x2F;hashmap数组加链表结构.png">
+<meta property="og:updated_time" content="2019-12-07T11:26:38.919Z">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;07&#x2F;java-HashMap&#x2F;shao&#x2F;blog&#x2F;source&#x2F;_posts&#x2F;java-HashMap&#x2F;hashmap数组加链表结构.png">
 
-<link rel="canonical" href="http://yoursite.com/2019/12/04/hello-world/">
+<link rel="canonical" href="http://yoursite.com/2019/12/07/java-HashMap/">
 
 
 <script id="page-configurations">
@@ -69,7 +72,7 @@
   };
 </script>
 
-  <title>Hello World | 嘚嘚的blog</title>
+  <title>java-HashMap | 嘚嘚的blog</title>
   
 
 
@@ -183,7 +186,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/04/hello-world/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/07/java-HashMap/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -196,7 +199,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Hello World
+          java-HashMap
         </h1>
 
         <div class="post-meta">
@@ -205,16 +208,21 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
+              
 
-              <time title="Created: 2019-12-04 22:31:08" itemprop="dateCreated datePublished" datetime="2019-12-04T22:31:08+08:00">2019-12-04</time>
+              <time title="Created: 2019-12-07 18:21:13 / Modified: 19:26:38" itemprop="dateCreated datePublished" datetime="2019-12-07T18:21:13+08:00">2019-12-07</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-12-05 10:40:47" itemprop="dateModified" datetime="2019-12-05T10:40:47+08:00">2019-12-05</time>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
               </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index">
+                    <span itemprop="name">java学习</span>
+                  </a>
+                </span>
+            </span>
 
           
 
@@ -227,16 +235,62 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<p>Quick Start</p>
-<h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ hexo server</span></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ hexo generate</span></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+        <h2 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a>一、前言</h2><p>在<a href="https://shaoliangliang1996.github.io/2019/12/07/leetcode之旅-01-两数之和/" target="_blank" rel="noopener">leetcode-01-两数之和</a>的题目中，提到了hash table 在查找方面提高时间复杂度的表现。本片文章是对hashmap进行详细的学习。</p>
+<h2 id="二、java中其他数据结构在新增和查找方面的表现"><a href="#二、java中其他数据结构在新增和查找方面的表现" class="headerlink" title="二、java中其他数据结构在新增和查找方面的表现"></a>二、java中其他数据结构在新增和查找方面的表现</h2><ol>
+<li>数组：<ul>
+<li>1.1 无序数组：<ul>
+<li>查找：时间复杂度时O(n)</li>
+<li>新增：时间复杂度O(1)</li>
+</ul>
+</li>
+<li>1..2 有序数组<ul>
+<li>查找：使用<font color="Chocolate" size="4">二分查找，差值查找，斐波那契查找</font>等方式，可将查找复杂度提高为O(logn)。但当实际需要插入删除操作时，由于涉及到数组元素的移动，平均时间复杂度为O(n)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>线性链表：<ul>
+<li>查找：O(n)</li>
+<li>新增: O(1) ,因为仅需引用变换，无序元素移动</li>
+</ul>
+</li>
+<li><p>二叉树：（本质：物理组织结构为链表）</p>
+<ul>
+<li>插入&amp;查找&amp;删除：O(logn)</li>
+</ul>
+</li>
+<li>哈希表：（本质：主干物理组织结构是数组）<ul>
+<li>查找：O(1)  当不存在哈希冲突时</li>
+</ul>
+</li>
+</ol>
+<h2 id="三、HashMap"><a href="#三、HashMap" class="headerlink" title="三、HashMap"></a>三、HashMap</h2><ol>
+<li><p>哈希函数和哈希冲突</p>
+<ul>
+<li><strong>HashMap利用哈希函数</strong>：hash表使用了数组的形式，当涉及到查找的时候，通过哈希函数计算的hash值，可以快速得到值对应的数组下标，定位到相应元素，时间复杂度为O(1)</li>
+<li><p><strong>解决哈希冲突</strong>：不可避免。哈希冲突的解决方案有多种:</p>
+<ul>
+<li>开放定址法（发生冲突，继续寻找下一块未被占用的存储地址）</li>
+<li>再散列函数法 ?</li>
+<li>链地址法 ?</li>
+</ul>
+<blockquote>
+<p>而HashMap即是采用了链地址法，也就是<font color="Chocolate" size="4">数组+链表</font>的方式</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>数据+链表的HashMap结构图</p>
+</li>
+</ol>
+<p><img src="/2019/12/07/java-HashMap/shao/blog/source/_posts/java-HashMap/hashmap数组加链表结构.png" alt></p>
+<p>数组是hashmap的主体，链表是为了解决哈希冲突。如果定位到的数组位置不含链表（当前entry的next指向null）,那么查找，添加等操作很快，仅需一次寻址即可；如果定位到的数组包含链表，对于添加操作，其时间复杂度为O(n)，首先遍历链表，存在即覆盖，否则新增；对于查找操作来讲，仍需遍历链表，然后通过key对象的equals方法逐一比对查找。所以，性能考虑，<strong>HashMap中的链表出现越少，性能才会越好。</strong></p>
+<blockquote>
+<p>之后有介绍了hashmap在不同的构造器下，新增put和查找get的具体步骤,源码解析。目前还不需要了解这么深入。待进一步学习。</p>
+</blockquote>
+<h2 id="参考列表"><a href="#参考列表" class="headerlink" title="参考列表"></a>参考列表</h2><ol>
+<li><a href="https://blog.csdn.net/woshimaxiao1/article/details/83661464" target="_blank" rel="noopener">深入浅出学Java——HashMap</a></li>
+</ol>
 
     </div>
 
@@ -245,17 +299,22 @@
     
 
       <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/hashMap/" rel="tag"># hashMap</a>
+              <a href="/tags/java/" rel="tag"># java</a>
+              <a href="/tags/%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" rel="tag"># 源码解析</a>
+          </div>
 
         
 
 
         
     <div class="post-nav">
-      <div class="post-nav-item"></div>
       <div class="post-nav-item">
-    <a href="/2019/12/04/hello/" rel="next" title="Typora使用tips">
-      Typora使用tips <i class="fa fa-chevron-right"></i>
+    <a href="/2019/12/07/leetcode%E4%B9%8B%E6%97%85-01-%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/" rel="prev" title="leetcode之旅-01-两数之和">
+      <i class="fa fa-chevron-left"></i> leetcode之旅-01-两数之和
     </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -293,7 +352,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、前言"><span class="nav-number">1.</span> <span class="nav-text">一、前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、java中其他数据结构在新增和查找方面的表现"><span class="nav-number">2.</span> <span class="nav-text">二、java中其他数据结构在新增和查找方面的表现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、HashMap"><span class="nav-number">3.</span> <span class="nav-text">三、HashMap</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考列表"><span class="nav-number">4.</span> <span class="nav-text">参考列表</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -401,6 +460,54 @@
   
 
   
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
 
   
 
