@@ -53,10 +53,10 @@
 <meta property="og:site_name" content="嘚嘚的blog">
 <meta property="og:description" content="1. 题目描述   概括：已知数组A和目标值T，在A中找到两个和为T的两个值。输出两个值的下标 前提：数组中一定有解且有唯一解，不能重复利用数组元素。  2. 我的解法暴力解法 ：双重循环，遍历数组nums，直到找到两个和为target的值，输出下标 1class Solution &amp;#123;2    public int[] twoSum(int[] nums, int target) &amp;#1">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;07&#x2F;leetcode%E4%B9%8B%E6%97%85-01-%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C&#x2F;%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C%E9%A2%98%E7%9B%AE.png">
-<meta property="og:updated_time" content="2019-12-07T07:33:54.614Z">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;07&#x2F;leetcode%E4%B9%8B%E6%97%85-01-%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C&#x2F;两数之和题目.png">
+<meta property="og:updated_time" content="2019-12-07T07:43:29.984Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;07&#x2F;leetcode%E4%B9%8B%E6%97%85-01-%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C&#x2F;%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C%E9%A2%98%E7%9B%AE.png">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;07&#x2F;leetcode%E4%B9%8B%E6%97%85-01-%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C&#x2F;两数之和题目.png">
 
 <link rel="canonical" href="http://yoursite.com/2019/12/07/leetcode%E4%B9%8B%E6%97%85-01-%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/">
 
@@ -210,7 +210,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2019-12-07 13:57:43 / Modified: 15:33:54" itemprop="dateCreated datePublished" datetime="2019-12-07T13:57:43+08:00">2019-12-07</time>
+              <time title="Created: 2019-12-07 13:57:43 / Modified: 15:43:29" itemprop="dateCreated datePublished" datetime="2019-12-07T13:57:43+08:00">2019-12-07</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -235,7 +235,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="1-题目描述"><a href="#1-题目描述" class="headerlink" title="1. 题目描述"></a>1. 题目描述</h2><p><img src="/2019/12/07/leetcode%E4%B9%8B%E6%97%85-01-%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C%E9%A2%98%E7%9B%AE.png" alt="题目描述"> </p>
+        <h2 id="1-题目描述"><a href="#1-题目描述" class="headerlink" title="1. 题目描述"></a>1. 题目描述</h2><p><img src="/2019/12/07/leetcode%E4%B9%8B%E6%97%85-01-%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/两数之和题目.png" alt="题目描述"> </p>
 <ul>
 <li>概括：已知数组A和目标值T，在A中找到两个<font color="Chocolate" size="4"><strong>和</strong></font>为T的两个值。输出两个值的下标</li>
 <li>前提：数组中一定有解且有唯一解，不能重复利用数组元素。</li>
@@ -243,7 +243,7 @@
 <h2 id="2-我的解法"><a href="#2-我的解法" class="headerlink" title="2. 我的解法"></a>2. 我的解法</h2><p><font color="GoldenRod" size="4">暴力解法</font> ：双重循环，遍历数组nums，直到找到两个和为target的值，输出下标</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span>[] twoSum(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> target) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;nums.length;i++)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=i+<span class="number">1</span>;j&lt;nums.length;j++)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">if</span>(nums[i]+nums[j]==target)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">                &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">                    <span class="keyword">return</span> <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;i,j&#125;;<span class="comment">//快速建立数组方法</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">                &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;<span class="number">0</span>,<span class="number">0</span>&#125;;<span class="comment">//若没找到，就随便输出两个值，应该不可能有这种情况</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">            </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr></table></figure>
 <ul>
-<li>时间复杂度：O（ $$n^2$$）</li>
+<li>时间复杂度：O（ <script type="math/tex">n^2</script>）</li>
 <li>空间复杂度： O（1）</li>
 </ul>
 <h2 id="3-解法二"><a href="#3-解法二" class="headerlink" title="3. 解法二"></a>3. 解法二</h2><p><font color="GoldenRod" size="4">充分利用hash table</font>  ：</p>
@@ -253,22 +253,20 @@
 <li><p>新解法：利用哈希表可以避免循环，直接找到列表中某个值的特性，把数组的每个元素保存为 hash 的 key，下标保存为 hash 的 value ，这样只需判断 sub 在不在 hash 的 key 里就可以了。可使第二层时间复杂度将为O(1)。</p>
 <blockquote>
 <p>注意需判断哈希表找到的值是否和第一重循环找到的值相同，即 i = j</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">int</span>[] twoSum(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> target) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  	<span class="comment">//建立hash table</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    Map&lt;Integer,Integer&gt; map=<span class="keyword">new</span> HashMap&lt;&gt;();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;nums.length;i++)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        map.put(nums[i],i);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  	<span class="comment">//只需一重循环便可找到两个值</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;nums.length;i++)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> sub=target-nums[i];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">      	<span class="comment">//需判断找到的值是否是i</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span>(map.containsKey(sub)&amp;&amp;map.get(sub)!=i)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;i,map.get(sub)&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"No two sum solution"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure></li>
-<li><p>时间复杂度：O(n)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">int</span>[] twoSum(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> target) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  	<span class="comment">//建立hash table</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    Map&lt;Integer,Integer&gt; map=<span class="keyword">new</span> HashMap&lt;&gt;();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;nums.length;i++)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        map.put(nums[i],i);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  	<span class="comment">//只需一重循环便可找到两个值</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;nums.length;i++)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> sub=target-nums[i];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">      	<span class="comment">//需判断找到的值是否是i</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span>(map.containsKey(sub)&amp;&amp;map.get(sub)!=i)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;i,map.get(sub)&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"No two sum solution"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure></blockquote>
 </li>
-<li><p>空间复杂度： O(n)   <strong>空间换时间</strong></p>
-</li>
+<li>时间复杂度：O(n)</li>
+<li>空间复杂度： O(n)   <strong>空间换时间</strong></li>
 </ul>
 <h2 id="3-解法三"><a href="#3-解法三" class="headerlink" title="3. 解法三"></a>3. 解法三</h2><p><font color="GoldenRod" size="4">算法二的简化版</font>  ：不需要判断hash找到的值是否与第一个值相同。复杂度不变。相当于在一重循环中，<strong>不断往前找hash值</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">int</span>[] twoSum(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> target) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    Map&lt;Integer,Integer&gt; map=<span class="keyword">new</span> HashMap&lt;&gt;();<span class="comment">//hash无需提前加入</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;nums.length;i++)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> sub=target-nums[i];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span>(map.containsKey(sub))&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;i,map.get(sub)&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        map.put(nums[i], i);<span class="comment">//无需判断重复，因判断时当前值还没加入</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"No two sum solution"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>hash table 的利用，在一维列表中减少时间复杂度，直接查找某个值非常方便</p>
-<h2 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h2><h3 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h3><p>利用如下代码创建hashmap，自动根据建立相应key值的hash值。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">Map&lt;Integer,Integer&gt; map=<span class="keyword">new</span> HashMap&lt;&gt;()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">map.put(nums[i],i)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//通过key值查找列表位置，隐藏了key值转换hash值，及hash对应的过程</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">map.containsKey(sub)<span class="comment">//判断是否含有key值</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">map.get(sub)<span class="comment">//去除该key值的索引号（下标）</span></span></pre></td></tr></table></figure>
+<h2 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h2><h3 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h3><p>利用如下代码创建hashmap，自动根据建立相应key值的hash值。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">Map&lt;Integer,Integer&gt; map=<span class="keyword">new</span> HashMap&lt;&gt;()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">map.put(nums[i],i)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//通过key值查找列表位置，隐藏了key值转换hash值，及hash对应的过程</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">map.containsKey(sub)<span class="comment">//判断是否含有key值</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">map.get(sub)<span class="comment">//去除该key值的索引号（下标）</span></span></pre></td></tr></table></figure></p>
 <blockquote>
 <p>hashmap的使用还待之后进一步总结</p>
 </blockquote>
 <h2 id="参考列表"><a href="#参考列表" class="headerlink" title="参考列表"></a>参考列表</h2><ol>
+<li><a href="https://leetcode-cn.com/problems/two-sum/" target="_blank" rel="noopener">leetcode-两数之和</a></li>
 <li><a href="https://leetcode.wang/leetCode-1-Two-Sum.html" target="_blank" rel="noopener">解决方案-wang</a></li>
 <li><a href="https://blog.csdn.net/woshimaxiao1/article/details/83661464" target="_blank" rel="noopener">扩展-深入浅出学Java——HashMap</a></li>
 </ol>
@@ -439,6 +437,56 @@
 
 
   
+
+  
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
 
   
 
