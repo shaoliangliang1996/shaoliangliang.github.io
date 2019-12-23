@@ -180,6 +180,110 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/07/leetcode%E4%B9%8B%E6%97%85-03-%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="嘚嘚">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="嘚嘚的blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/12/07/leetcode%E4%B9%8B%E6%97%85-03-%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2/" class="post-title-link" itemprop="url">leetcode之旅-03-无重复字符的最长子串</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-12-07 21:21:11" itemprop="dateCreated datePublished" datetime="2019-12-07T21:21:11+08:00">2019-12-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-12-18 12:29:37" itemprop="dateModified" datetime="2019-12-18T12:29:37+08:00">2019-12-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode%E4%B9%8B%E6%97%85/" itemprop="url" rel="index">
+                    <span itemprop="name">leetcode之旅</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="1-题目描述"><a href="#1-题目描述" class="headerlink" title="1. 题目描述"></a>1. 题目描述</h2><p><img src="/2019/12/07/leetcode%E4%B9%8B%E6%97%85-03-%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2/无重复字符的最长子串.png" alt="题目描述"></p>
+<ul>
+<li>概述：</li>
+</ul>
+<h2 id="2-我的解法"><a href="#2-我的解法" class="headerlink" title="2. 我的解法"></a>2. 我的解法</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">lengthOfLongestSubstring</span><span class="params">(String s)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span>(s==<span class="keyword">null</span>||s.equals(<span class="string">""</span>)) <span class="keyword">return</span> <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> Max=<span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;s.length();i++)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=i+<span class="number">1</span>;j&lt;s.length();j++)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">            &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(s.substring(i,j).indexOf(String.valueOf(s.charAt(j)))==-<span class="number">1</span>) </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">                    Max=(Max&gt;=(j-i+<span class="number">1</span>))?Max:(j-i)+<span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">else</span> <span class="keyword">break</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> Max;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<p>时间复杂度：最坏到达O($n^2$)</p>
+<h2 id="3-解法二"><a href="#3-解法二" class="headerlink" title="3 解法二"></a>3 解法二</h2><ol>
+<li>我的解法存在一点问题：每次第二层循环结束时j都回到i+1的位置。</li>
+<li>改进：由于之前的探索可知i-j之间存在与j位重复的字符，那么下一次循环的时候，j的位置可以固定不动，移动i至重复字符的下一位即可。</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">lengthOfLongestSubstring</span><span class="params">(String s)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span>(s==<span class="keyword">null</span>||s.equals(<span class="string">""</span>)) <span class="keyword">return</span> <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> Max=<span class="number">1</span> , n = s.length() , sub = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>,j=i+<span class="number">1</span> ; i&lt;n&amp;&amp;j&lt;n ;j++)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        &#123;<span class="comment">//每次都探索新的j</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">int</span> reindex=s.substring(i,j).indexOf(s.charAt(j));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">if</span>(reindex == -<span class="number">1</span>) </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">                Max=(Max&gt;=(j-i+<span class="number">1</span>))?Max:j-i+<span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">else</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">            &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">                i = sub+reindex +<span class="number">1</span>;<span class="comment">//移到重复位置的下一位</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">                sub = i;<span class="comment">//寻找i在s中移动的位置，reindex只是子字符串总的位置</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> Max;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<ul>
+<li>时间复杂度：O(n)</li>
+</ul>
+<h2 id="4-解法四"><a href="#4-解法四" class="headerlink" title="4 解法四"></a>4 解法四</h2><p>巧用hashmap。<br>采用i跳跃的方式，维护hashmap中的键值对。</p>
+<ul>
+<li>如果没有重复字符，则向map中加入新的j位置的字符，value值为如果发生重复，i需要跳转到的位置。其实也是不断更新对应字符的下一次跳转位置。</li>
+<li>如果发生重复，i跳转的规则是取当前位置和重复字符所在位置的下一个位置的最大值。因为map在去字串时没有删除之前的字符。这样做的目的是为了防止，当前重复的字符其实并没有包含在当前字串中，而是之前遗留的字符，防止i倒退。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">lengthOfLongestSubstring</span><span class="params">(String s)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> n = s.length(), ans = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        Map&lt;Character, Integer&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;(); </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>, i = <span class="number">0</span>; j &lt; n; j++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">if</span> (map.containsKey(s.charAt(j))) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">                i = Math.max(map.get(s.charAt(j)), i); <span class="comment">//采用i跳跃</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">            ans = Math.max(ans, j - i + <span class="number">1</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">            map.put(s.charAt(j), j + <span class="number">1</span>);<span class="comment">//下标 + 1 代表 i 要移动的下个位置</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> ans;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure></li>
+<li>时间复杂度：O(n)</li>
+<li>空间复杂度：O(m)</li>
+</ul>
+<h2 id="更多解法，看题解"><a href="#更多解法，看题解" class="headerlink" title="更多解法，看题解"></a>更多解法，看题解</h2><h2 id="5-扩展"><a href="#5-扩展" class="headerlink" title="5. 扩展"></a>5. 扩展</h2><h3 id="5-1-Java-String-valueOf-Method"><a href="#5-1-Java-String-valueOf-Method" class="headerlink" title="5.1 Java - String valueOf() Method"></a>5.1 Java - String valueOf() Method</h3><p><img src="/2019/12/07/leetcode%E4%B9%8B%E6%97%85-03-%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2/Java String valueOf(" alt="题目描述"> Method .png)<br>这个方法的作用就是将其他的类型转化为string的形式，包括将boolean    char    char[]    doubel    float    int    long    Object</p>
+<h3 id="5-2-Java-String-indexOf"><a href="#5-2-Java-String-indexOf" class="headerlink" title="5.2 Java String indexOf()"></a>5.2 Java String indexOf()</h3><p>返回输入文本的在string中的下标</p>
+<ol>
+<li>输入一个char，输出该char在字符串中对应的下标<br><img src="/2019/12/07/leetcode%E4%B9%8B%E6%97%85-03-%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2/String indexOf(" alt="题目描述">1.png)</li>
+<li>输入插入和你strt值，从字符串的strt位置开始查找输入的字符第一次出现的下标<br><img src="/2019/12/07/leetcode%E4%B9%8B%E6%97%85-03-%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2/String indexOf(" alt="题目描述">2.png)</li>
+<li>可以查找substring 对应的下标的方法<br><img src="/2019/12/07/leetcode%E4%B9%8B%E6%97%85-03-%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2/String indexOf(" alt="题目描述">3.png)</li>
+<li>可以从指定位置开始查找substring，输出下标<br><img src="/2019/12/07/leetcode%E4%B9%8B%E6%97%85-03-%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2/String indexOf(" alt="题目描述">4.png)</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/07/leetcode%E4%B9%8B%E6%97%85-02-%E4%B8%A4%E6%95%B0%E7%9B%B8%E5%8A%A0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -875,7 +979,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-count">17</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
