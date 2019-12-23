@@ -180,6 +180,649 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/23/leetcode%E4%B9%8B%E6%97%85-71-%E7%AE%80%E5%8C%96%E8%B7%AF%E5%BE%84/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="嘚嘚">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="嘚嘚的blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/12/23/leetcode%E4%B9%8B%E6%97%85-71-%E7%AE%80%E5%8C%96%E8%B7%AF%E5%BE%84/" class="post-title-link" itemprop="url">leetcode之旅-71-简化路径</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2019-12-23 19:22:34 / Modified: 19:38:07" itemprop="dateCreated datePublished" datetime="2019-12-23T19:22:34+08:00">2019-12-23</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode%E4%B9%8B%E6%97%85/" itemprop="url" rel="index">
+                    <span itemprop="name">leetcode之旅</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="题目描述（中等题目）"><a href="#题目描述（中等题目）" class="headerlink" title="题目描述（中等题目）"></a>题目描述（中等题目）</h2><p><img src="/2019/12/23/leetcode%E4%B9%8B%E6%97%85-71-%E7%AE%80%E5%8C%96%E8%B7%AF%E5%BE%84/题目描述.png" alt="题目描述"></p>
+<ul>
+<li>输入”/a/../../b/../c//.//“输出“/c”</li>
+<li>不考虑”./d”.”../dfd.df” 这种两种情况</li>
+</ul>
+<h2 id="我的解法"><a href="#我的解法" class="headerlink" title="我的解法"></a>我的解法</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">simplifyPath</span><span class="params">(String path)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">        Stack&lt;String&gt; stack = <span class="keyword">new</span> Stack&lt;String&gt;();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span>(String ss:path.split(<span class="string">"/"</span>))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">if</span>(!ss.equals(<span class="string">".."</span>)&amp;&amp;!ss.equals(<span class="string">"."</span>)&amp;&amp;!ss.equals(<span class="string">""</span>))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">                 stack.push(ss);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(ss.equals(<span class="string">".."</span>)&amp;&amp;!stack.empty())</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">                stack.pop();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">        String out=<span class="string">""</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">while</span>(!stack.empty())</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">        &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">            out = <span class="string">"/"</span>+stack.pop()+out;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span>(out.equals(<span class="string">""</span>))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> <span class="string">"/"</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> out;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<ul>
+<li>时间复杂度：O(n)</li>
+<li>空间复杂度：O(n)</li>
+</ul>
+<h2 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h2><p>String的用法</p>
+<p>Stack的用法</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/20/leetcode%E4%B9%8B%E6%97%85-21-%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="嘚嘚">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="嘚嘚的blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/12/20/leetcode%E4%B9%8B%E6%97%85-21-%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E9%93%BE%E8%A1%A8/" class="post-title-link" itemprop="url">leetcode之旅-21-合并两个有序链表</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2019-12-20 13:53:35 / Modified: 13:56:05" itemprop="dateCreated datePublished" datetime="2019-12-20T13:53:35+08:00">2019-12-20</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode%E4%B9%8B%E6%97%85/" itemprop="url" rel="index">
+                    <span itemprop="name">leetcode之旅</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="1-题目描述"><a href="#1-题目描述" class="headerlink" title="1. 题目描述"></a>1. 题目描述</h2>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/20/leetcode%E4%B9%8B%E6%97%85-19-%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACN%E4%B8%AA%E8%8A%82%E7%82%B9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="嘚嘚">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="嘚嘚的blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/12/20/leetcode%E4%B9%8B%E6%97%85-19-%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACN%E4%B8%AA%E8%8A%82%E7%82%B9/" class="post-title-link" itemprop="url">leetcode之旅-19-删除链表的倒数第N个节点</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2019-12-20 12:26:02 / Modified: 13:32:38" itemprop="dateCreated datePublished" datetime="2019-12-20T12:26:02+08:00">2019-12-20</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode%E4%B9%8B%E6%97%85/" itemprop="url" rel="index">
+                    <span itemprop="name">leetcode之旅</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="1-题目描述（中等难度）"><a href="#1-题目描述（中等难度）" class="headerlink" title="1 题目描述（中等难度）"></a>1 题目描述（中等难度）</h2><p><img src="/2019/12/20/leetcode%E4%B9%8B%E6%97%85-19-%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACN%E4%B8%AA%E8%8A%82%E7%82%B9/题目描述.png" alt="题目描述"></p>
+<h2 id="2-我的解法"><a href="#2-我的解法" class="headerlink" title="2 我的解法"></a>2 我的解法</h2><p>思路：需要两遍扫描才可得到结果，不够高效</p>
+<ul>
+<li>计算链表的长度，计算需删除正数第几个节点</li>
+<li>找到需要删除的节点的前序，直接删去节点即可<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> * public class ListNode &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> *     int val;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> *     ListNode next;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> *     ListNode(int x) &#123; val = x; &#125;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> * &#125;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> */</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">removeNthFromEnd</span><span class="params">(ListNode head, <span class="keyword">int</span> n)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span>(head==<span class="keyword">null</span>)<span class="keyword">return</span> <span class="keyword">null</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">//先计算节点个数</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> dotnum=<span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">        ListNode l3=head;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">while</span>(l3!=<span class="keyword">null</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">        &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">            dotnum++;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">            l3 = l3.next;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">//删除到处第n个节点</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> delindex=dotnum-n;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span>(delindex==<span class="number">0</span>)<span class="keyword">return</span> head.next;<span class="comment">//如果删除第一个节点，则直接返回</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">        ListNode pre=head;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span> ;i&lt;delindex-<span class="number">1</span>;i++)<span class="comment">//找到被删节点的前一个节点</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">            pre=pre.next;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">        l3=pre.next;<span class="comment">//被删节点</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">        pre.next=l3.next;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> head;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure></li>
+<li>时间复杂度：O(n)</li>
+<li>空间复杂度：O(1)</li>
+</ul>
+<h2 id="3-解法二"><a href="#3-解法二" class="headerlink" title="3 解法二"></a>3 解法二</h2><p>使用快慢指针：优点这里我们用到的快慢指针其实没有必要，快慢指针的一个优点是，不需要知道链表长度就可以找到倒数第 n 个节点。<br>问题：我的解法没有考虑，通过一次遍历的方式解决问题。<br>方法：设置快慢指针，两者间隔n个节点，当快指针到达链尾时，慢指针正好指向删除节点的前序节点。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> ListNode <span class="title">removeNthFromEnd</span><span class="params">(ListNode head, <span class="keyword">int</span> n)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    ListNode dummy = <span class="keyword">new</span> ListNode(<span class="number">0</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    dummy.next = head;<span class="comment">//加空指针，不用特判删除链首的情况</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    ListNode first = dummy;<span class="comment">//快指针</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">    ListNode second = dummy;<span class="comment">//慢指针</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">//第一个指针先移动 n 步</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n + <span class="number">1</span>; i++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        first = first.next;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    &#125; </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    <span class="comment">//第一个指针到达终点停止遍历</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">while</span> (first != <span class="keyword">null</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">        first = first.next;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">        second = second.next;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">    second.next = second.next.next;<span class="comment">//删去节点</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> dummy.next;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure><br>不设置空指针版<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">removeNthFromEnd</span><span class="params">(ListNode head, <span class="keyword">int</span> n)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">        ListNode first = head;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        ListNode second = head;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=n;i++)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">if</span>(first==<span class="keyword">null</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">return</span> head.next;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">            first = first.next;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">while</span>(first!=<span class="keyword">null</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">        &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">            first=first.next;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">            second=second.next;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">        second.next=second.next.next;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> head;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/20/leetcode%E4%B9%8B%E6%97%85-61-%E6%97%8B%E8%BD%AC%E9%93%BE%E8%A1%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="嘚嘚">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="嘚嘚的blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/12/20/leetcode%E4%B9%8B%E6%97%85-61-%E6%97%8B%E8%BD%AC%E9%93%BE%E8%A1%A8/" class="post-title-link" itemprop="url">leetcode之旅-61-旋转链表</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-12-20 10:57:50" itemprop="dateCreated datePublished" datetime="2019-12-20T10:57:50+08:00">2019-12-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-12-23 15:31:19" itemprop="dateModified" datetime="2019-12-23T15:31:19+08:00">2019-12-23</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode%E4%B9%8B%E6%97%85/" itemprop="url" rel="index">
+                    <span itemprop="name">leetcode之旅</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="1-题目描述（中等难度）"><a href="#1-题目描述（中等难度）" class="headerlink" title="1. 题目描述（中等难度）"></a>1. 题目描述（中等难度）</h2><p><img src="/2019/12/20/leetcode%E4%B9%8B%E6%97%85-61-%E6%97%8B%E8%BD%AC%E9%93%BE%E8%A1%A8/题目描述.png" alt="题目描述"></p>
+<ul>
+<li>概述：涉及到倒数第几个节点的问题。我的思路是将问题转化为正数第几个的问题，或使用快慢指针。<h2 id="2-我的解法"><a href="#2-我的解法" class="headerlink" title="2. 我的解法"></a>2. 我的解法</h2></li>
+</ul>
+<p>思路：</p>
+<ul>
+<li>先得到链表的节点数，即节点长度</li>
+<li>再计算旋转点是正数的第几个数。</li>
+<li>计算新的k值，忽略重复旋转的次数</li>
+<li>如果最后k==0，说明无需旋转，直接输出。</li>
+<li>设置pre指针。pre的next指向需要旋转的链表的第一个节点。将他们整体移到首部<br>问题：我的解法太过复杂，在计算链表长度时，可以保存链表的尾指针，这样在第二遍循环时，就不用寻找了。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> * public class ListNode &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> *     int val;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> *     ListNode next;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> *     ListNode(int x) &#123; val = x; &#125;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> * &#125;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> */</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">rotateRight</span><span class="params">(ListNode head, <span class="keyword">int</span> k)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span>(head==<span class="keyword">null</span>)<span class="keyword">return</span> <span class="keyword">null</span>;<span class="comment">//如果链表为空</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">//先计算节点数量</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">        ListNode l1=head;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> dotnum=<span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">while</span>(l1!=<span class="keyword">null</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">        &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">            dotnum++;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">            l1=l1.next;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">//倒转</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span>(k&gt;=dotnum)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">            k=k%dotnum;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span>(k==<span class="number">0</span>) <span class="keyword">return</span> head<span class="comment">//0属于特判，相当于没有反转，之前没有考虑到</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">        ListNode pre=head;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> rotalteindex=dotnum-k;<span class="comment">// 计算可得，pre的下一个节点就是要倒转的序列</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">while</span>(pre!=<span class="keyword">null</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">        &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">if</span>(rotalteindex==<span class="number">1</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">            &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">                ListNode ro=pre.next;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">                pre.next=<span class="keyword">null</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">                pre=ro;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">while</span>(ro.next!=<span class="keyword">null</span>)<span class="comment">//找到旋转链表的尾部指针，使其直接指向总链表的head</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line">                 ro=ro.next;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line">                ro.next=head;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line">                head=pre;<span class="comment">//更新head</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">37</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">break</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">38</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">39</span></pre></td><td class="code"><pre><span class="line">            pre=pre.next;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">40</span></pre></td><td class="code"><pre><span class="line">            rotalteindex--;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">41</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">42</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> head;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">43</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">44</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<ul>
+<li>时间复杂度：O(n)</li>
+<li>空间复杂度：O(1)<br>解决问题：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> * public class ListNode &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> *     int val;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> *     ListNode next;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> *     ListNode(int x) &#123; val = x; &#125;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> * &#125;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> */</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">rotateRight</span><span class="params">(ListNode head, <span class="keyword">int</span> k)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span>(head==<span class="keyword">null</span>)<span class="keyword">return</span> <span class="keyword">null</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">//先计算节点数量</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">        ListNode l1=head;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">        ListNode tail=l1;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> dotnum=<span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">while</span>(l1!=<span class="keyword">null</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">        &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">            dotnum++;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">            tail=l1;<span class="comment">//记录尾指针</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">            l1=l1.next;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">//倒转</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span>(k&gt;=dotnum)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">            k=k%dotnum;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span>(k==<span class="number">0</span>) <span class="keyword">return</span> head;<span class="comment">//0属于特判，相当于没有反转，之前没有考虑到</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">        ListNode pre=head;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> rotalteindex=dotnum-k;<span class="comment">// 计算可得，pre的下一个节点就是要倒转的序列</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">while</span>(pre!=<span class="keyword">null</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">        &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">if</span>(rotalteindex==<span class="number">1</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">            &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">                ListNode ro=pre.next;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line">                pre.next=<span class="keyword">null</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line">                tail.next=head;<span class="comment">//直接使用尾指针</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line">                head=ro;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">37</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">break</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">38</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">39</span></pre></td><td class="code"><pre><span class="line">            pre=pre.next;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">40</span></pre></td><td class="code"><pre><span class="line">            rotalteindex--;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">41</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">42</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> head;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">43</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">44</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<h2 id="3方法二："><a href="#3方法二：" class="headerlink" title="3方法二："></a>3方法二：</h2>这道题不能直接使用快慢指针，不求链表总长，因为k是一个任意大的数，存在重复旋转的问题。<br>如果k&lt;=链表总长，那么可以直接用快慢指针<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">rotateRight</span><span class="params">(ListNode head, <span class="keyword">int</span> k)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span>(head==<span class="keyword">null</span>)<span class="keyword">return</span> <span class="keyword">null</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">       <span class="comment">//利用快慢指针</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">       ListNode first=head;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">       ListNode second=head;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">       <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;k;i++)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">            first=first.next;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">while</span>(first.next!=<span class="keyword">null</span>)<span class="comment">//使快指针最后指向尾节点</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">            first=first.next;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">            second=second.next;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">        ListNode newhead=second.next;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">        second.next=<span class="keyword">null</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">        first.next=head;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">        head=newhead;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> newhead;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<h2 id="4-总结"><a href="#4-总结" class="headerlink" title="4 总结"></a>4 总结</h2>对于针对链表中倒数第n个节点的问题，可以使用快慢指针或先求链表总长len，在计算节点正数的顺序。使用第一中方法的前提是k&lt;=len.</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/18/Java-String%E8%AF%A6%E8%A7%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="嘚嘚">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="嘚嘚的blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/12/18/Java-String%E8%AF%A6%E8%A7%A3/" class="post-title-link" itemprop="url">Java-String详解</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2019-12-18 12:34:58 / Modified: 13:10:20" itemprop="dateCreated datePublished" datetime="2019-12-18T12:34:58+08:00">2019-12-18</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java%E8%AE%B2%E8%A7%A3/" itemprop="url" rel="index">
+                    <span itemprop="name">Java讲解</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a href="https://docs.oracle.com/javase/7/docs/api/java/lang/String.html" target="_blank" rel="noopener">官方文档</a></p>
+<h2 id="1-String类简述"><a href="#1-String类简述" class="headerlink" title="1. String类简述"></a>1. String类简述</h2><h3 id="1-1-类结构"><a href="#1-1-类结构" class="headerlink" title="1.1 类结构"></a>1.1 类结构</h3><p>public final class String<br>extents:    Object<br>implements:        </p>
+<ul>
+<li>Serializable</li>
+<li>Comparable<String></String></li>
+<li>CharSequence</li>
+</ul>
+<h3 id="1-2-综述"><a href="#1-2-综述" class="headerlink" title="1.2 综述"></a>1.2 综述</h3><ul>
+<li>由于是final类，所以String是constant，创建后就不能修改。但String buffers支持可变string。由于String对象的不可变性，使其可以被分享。</li>
+<li>String concatenation：Java的设计着提供了‘+’操作符，方便将其他对象转化为string。通过StringBuilder（or StringBuffer）类支持多个String连接</li>
+<li>-String converson：Java的设计着提供了‘+’操作符，方便的将其他对象转化为string。通过Object类的toString（）方法。<h2 id="2-Constructor-Summary-构建方法"><a href="#2-Constructor-Summary-构建方法" class="headerlink" title="2. Constructor Summary-构建方法"></a>2. Constructor Summary-构建方法</h2></li>
+<li>String()</li>
+<li>String(byte[] bytes)<h2 id="3-Method-Summary"><a href="#3-Method-Summary" class="headerlink" title="3 Method Summary"></a>3 Method Summary</h2></li>
+<li>char charAt(int index)</li>
+<li>int codePointAt(int index)</li>
+<li>int compareTo(String anotherString)</li>
+<li>int compareToIgnoreCase(String str)</li>
+<li>String concat(String str)</li>
+<li>boolean contains(CharSuquence s)</li>
+<li>boolean contentEquals(CharSuquence s)</li>
+<li>boolean equals(Object anObject)</li>
+<li>byte[] getBytes()</li>
+<li>int indexOf()</li>
+<li>int indexOf(int ch)</li>
+<li>int indexOf(int ch,int fromIndex)</li>
+<li>int indexOf(String str)</li>
+<li>int indexOf(String str, int fromIndex)</li>
+<li>boolean isEmpty()</li>
+<li>int lastIndexOf()</li>
+<li>int length()</li>
+<li>String replace(char oldChar, char newChar)</li>
+<li>Stirng[] split(String regex)</li>
+<li>String substring(int beginIndex,in endIndex)</li>
+<li>char[]  toCharArray()</li>
+<li>static String valueOf(char c)</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/18/leetcode%E4%B9%8B%E6%97%85-05-%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%97%E4%B8%B2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="嘚嘚">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="嘚嘚的blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/12/18/leetcode%E4%B9%8B%E6%97%85-05-%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%97%E4%B8%B2/" class="post-title-link" itemprop="url">leetcode之旅-05-最长回文字串</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2019-12-18 12:06:00 / Modified: 12:16:22" itemprop="dateCreated datePublished" datetime="2019-12-18T12:06:00+08:00">2019-12-18</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/leetcode%E4%B9%8B%E6%97%85/" itemprop="url" rel="index">
+                    <span itemprop="name">leetcode之旅</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="1-题目描述（中等题目）"><a href="#1-题目描述（中等题目）" class="headerlink" title="1. 题目描述（中等题目）"></a>1. 题目描述（中等题目）</h2><p><img src="/2019/12/18/leetcode%E4%B9%8B%E6%97%85-05-%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%97%E4%B8%B2/题目描述.png" alt="题目描述"></p>
+<ul>
+<li>就是查找字符串中最长的一个回文字串，结果唯一<h2 id="2-我的解法"><a href="#2-我的解法" class="headerlink" title="2 我的解法"></a>2 我的解法</h2>思路：暴力解法，滑动窗口。从大到小查找，每一个窗口的内容都判断是否时回文，是，就直接返回结果。这样做保证返回的最长回文字串之一。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//题目思路是 设置滑动窗口，从大到小查找</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isPalindromic</span><span class="params">(String s,<span class="keyword">int</span> start,<span class="keyword">int</span> end)</span></span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="function">    </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">while</span>(start&lt;end)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">if</span> (s.charAt(start++)!= s.charAt(end--))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">longestPalindrome</span><span class="params">(String s)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> n = s.length();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span>(n==<span class="number">0</span>)<span class="comment">//注意判空</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> <span class="string">""</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> w=n ; w&gt;<span class="number">1</span> ; w--)<span class="comment">//窗口大小</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">        &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">           <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>,j=i+w-<span class="number">1</span>;j&lt;n&amp;&amp;i&lt;n;i++,j++)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">            &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">if</span>(isPalindromic(s,i,j))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">                    <span class="keyword">return</span> s.substring(i,j+<span class="number">1</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> String.valueOf(s.charAt(<span class="number">0</span>));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure></li>
+<li>时间复杂度：最坏O($n^3$)。主函数与两层循环，每次循环的最大值都是n，所以是$n^2$，在判断回文串时，最大值是n，所以一共O($n^3$)</li>
+<li>空间复杂度：O(1)</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/18/#%20KDD18%20Neural%20Memory%20Streaming%20Recommender%20Networks%20with%20Adversarial%20Training/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="嘚嘚">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="嘚嘚的blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/12/18/#%20KDD18%20Neural%20Memory%20Streaming%20Recommender%20Networks%20with%20Adversarial%20Training/" class="post-title-link" itemprop="url"># KDD18 Neural Memory Streaming Recommender Networks with Adversarial Training</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2019-12-18 09:32:50 / Modified: 14:15:04" itemprop="dateCreated datePublished" datetime="2019-12-18T09:32:50+08:00">2019-12-18</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="KDD18-Neural-Memory-Streaming-Recommender-Networks-with-Adversarial-Training"><a href="#KDD18-Neural-Memory-Streaming-Recommender-Networks-with-Adversarial-Training" class="headerlink" title="KDD18 Neural Memory Streaming Recommender Networks with Adversarial Training"></a>KDD18 Neural Memory Streaming Recommender Networks with Adversarial Training</h1><h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>  随着各种社交媒体和电子商务平台的日益普及，大量的用户行为数据（例如，用户交易数据，评级和评论数据）以前所未有的且不断增长的规模持续生成。研究具有流数据输入的推荐器系统更为现实和实用。<strong>用户生成的流数据呈现出独特的属性，例如时间排序，连续和高速</strong>，这对曾经非常成功的推荐技术提出了巨大的新挑战。尽管最近已经基于循环神经模型开发了一些时间或顺序推荐器模型，<strong>但由于它们的短期记忆和捕获用户信息的能力有限</strong>，因此它们大多数只能应用于基于会话的推荐方案。长期稳定的利益。在本文中，<strong>我们提出了一种基于神经记忆网络和外部记忆的流式推荐模型，以统一的方式捕获和存储长期稳定利益和短期动态利益。开发了一种基于生成对抗网络（GAN）的自适应负采样框架，以优化我们提出的流推荐模型，</strong>有效地克服了传统的负采样方法的局限性，并提高了模型参数推断的有效性。在两个大型推荐数据集上进行了广泛的实验，实验结果表明了我们提出的模型在流推荐场景中的优越性。</p>
+<h2 id="introduction"><a href="#introduction" class="headerlink" title="introduction"></a>introduction</h2><p>  亚马逊，netflix等很多公司依靠推荐系统推荐用户可能消费的媒体内容或产品的能力，获取利润。个性化推荐在现代生活总占有很大的比重<br>  虽然推荐系统吸引了大量研究兴趣，但流式推荐系统的子区域仍未开发。诸如Amazon和Netflix之类的现实世界社交媒体和电子商务平台以前所未有的速度生成了大量的用户项目交互数据（即用户行为数据）。例如，在2017年11月11日的光棍节购物活动中，阿里巴巴进行了近15亿笔交易[30]。此类数据是按时间排序，连续，高速且随时间变化的，这决定了推荐系统中数据的流式传输性质。因此，使用流数据框架研究推荐器系统更为实用。实时流设置对常规推荐器系统提出了巨大的挑战，其中大多数推荐器是为静态设置设计的，并通过批处理学习技术来实现，在处理流情况时，它们通常具有以下缺点：1）重新运行批处理模型所花费的时间导致模型更新延迟； 2）在存在流数据的情况下无法跟踪快速变化的趋势（例如，用户偏好和商品受欢迎程度）； 3）显式存储所有历史数据的大量内存开销。<br>  由于推荐系统本质上是一个增量过程，因此已经采用或开发了一些基于随机梯度下降（SGD）和粒子过滤器[11，54]的在线学习技术来支持流式推荐。但是，它们遭受“短期记忆”的问题，即，由于更新这些模型的算法仅基于最新的数据点，并且不考虑过去的观察结果，因此模型很快就忘记了在早期阶段学到的模式。基于这些在线学习算法的推荐模型无法捕获用户的长期稳定兴趣。最近，提出了一种基于循环神经模型的推荐系统[17，49]来解决流推荐问题，该系统采用递归神经网络（RNN）或长短期记忆（LSTM）来捕获和存储交互项的顺序模式或用户的动态兴趣。这样的模型学习输入数据的连续和表示，并在每个步骤中跨整个存储单元执行全局更新。这些体系结构设计鼓励RNN / LSTM从数据中捕获顺序模式，这使得基于RNN / LSTM的推荐系统特别擅长捕获顺序用户活动模式或用户时间动态。它们通常应用于没有用户资料（即用户的历史互动数据）的基于会话的推荐方案。但是，像在线学习算法一样，RNN / LSTM在建模和捕获用户的长期稳定兴趣方面也有局限性，而这些兴趣几乎不受时间因素的影响。作者认为用户的兴趣几乎不受时间的影响。<br>  为此，我们提出了一种名为神经记忆推荐网络（NMRN）的新型模型。 NMRN受神经图灵机（NTM）[14]和内存网络（NemNN）[37]的启发，由两个主要组件组成：增强的存储用户和商品信息的存储器，以及与用户活动数据交互并读取或读取数据的控制器网络。写的回忆。具有外部存储器的增强控制器网络将存储和处理信息的任务分开，并使网络仅专注于处理存储在其外部的信息。它还增加了存储知识的能力，因此，如有必要，用户的长期和稳定偏好可以保持不变。而且，NMRN可以像物理计算机一样按需灵活，明确地读取和写入存储器。 NMRN鼓励在内存中进行本地更改，而这种直接对内部内存执行本地更新的功能使NMRN能够强大地集成用户最近的交互数据并捕获其新出现的兴趣。<br>  具体而言，NMRN的外部存储器由密钥存储器和值存储器组成。键值存储网络（KV-MemNN）[26，57]的结构使原始的MemNN更适合处理成对数据。给定一个新的用户项交互对（u，v）实时到达系统后，NMRN首先从密钥存储器中生成一个由u激活的软地址。解决过程的灵感来自于注意力机制的最新进展，这种进展在计算机视觉[27，51]和NLP [23，59]领域很流行，但在推荐系统领域却很少研究。推荐器系统中应用的警告机制对于提高检索准确性和模型可解释性很有用。我们的注意力设计的基本思想是学习密钥存储器中的加权表示，然后通过Softmax函数作为软地址将其转换为概率分布。然后，NMRN基于软地址从值存储器中读取数据，从而得出一个既代表长期稳定的矢量</p>
+<p>  由于未观察到的样本数量非常多，我们采用[24]中提出的负采样方法来提高训练效率。大多数现有的否定抽样方法都使用随机抽样[1，24，38]或基于流行度的抽样策略[5，11]。但是，在这些抽样策略中生成的大多数负面示例可以很容易地与观察到的示例区分开，并且对培训的贡献很小，因为被抽样的项目可能与目标用户完全无关。此外，这些采样方法的适应性不足以生成对抗性负面示例，因为（1）它们是静态的，因此没有考虑到用户与某项之间的估计相似度或接近度在学习过程中会发生变化。例如，用户u和采样的噪声项v之间的相似度在一开始就很高，但是经过几个梯度下降步骤后，相似度就很低； （2）这些采样器是全局采样器，无法反映噪声项的信息量。特定用户。有鉴于此，我们基于生殖对抗网络（GAN）开发了一种自适应噪声采样器[13]来优化我们的模型，该模型同时考虑了特定用户和模型参数的当前值，以自适应地生成“困难”和infor -负面例子。此外，为了同时捕获用户和项目之间的一阶相似度以及用户之间和项目之间的二阶相似度以学习用户和项目的鲁棒表示，我们采用欧氏距离来度量用户之间的相似度灵感来自[19]的产品，而不是广泛采用的点积。<br>2468<br>2<br>总体而言，我们总结了本文的主要贡献：</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/14/#%20DLD%E6%A8%A1%E5%9E%8B%E6%80%BB%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="嘚嘚">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="嘚嘚的blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/12/14/#%20DLD%E6%A8%A1%E5%9E%8B%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url"># DLD模型总结</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-12-14 12:49:17" itemprop="dateCreated datePublished" datetime="2019-12-14T12:49:17+08:00">2019-12-14</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="DLD模型总结"><a href="#DLD模型总结" class="headerlink" title="DLD模型总结"></a>DLD模型总结</h1><h2 id="1-DLD-综述"><a href="#1-DLD-综述" class="headerlink" title="1. DLD 综述"></a>1. DLD 综述</h2><p>我将知识追踪的过程分为两阶段。</p>
+<ul>
+<li>1  第一阶段：根据学生的做题序列，追踪学生的知识状态。——遗忘</li>
+<li>2  第二阶段：根据知识状态结合题目，预测学生表现。——题目难度</li>
+</ul>
+<p>在阶段一中，遗忘往往伴随着学习出现。经典的艾宾浩斯遗忘曲线阐述了遗忘过程的不规律性，备受推崇的艾宾浩斯学习法更是推荐学习者重复练习，巩固知识，使短期记忆转化为长期记忆。长短期记忆共同影响着学生的学习效果，影响未来的表现。<br>在阶段二中，学生表现不仅与知识熟练度有关，也和题目难度有关，题目包含知识点，进一步可以得出，与知识点的难度有关。知识点的难度又与题目考查的知识的深度和知识点本身的难度有关。</p>
+<h2 id="2-长短期记忆（遗忘）"><a href="#2-长短期记忆（遗忘）" class="headerlink" title="2. 长短期记忆（遗忘）"></a>2. 长短期记忆（遗忘）</h2><h3 id="2-1-想法启发"><a href="#2-1-想法启发" class="headerlink" title="2.1 想法启发"></a>2.1 想法启发</h3><p>在推荐系统领域存在长期兴趣和短期兴趣的问题。四篇论文总结。</p>
+<ol>
+<li>IJCAI17 time-lstm：在根据用户的历史行为数据，推荐物品。作者认为，用户具有长期兴趣，以及用户上一时刻访问的物品，在短时间内对下一时刻访问的物品影响较大，也就是短期兴趣。</li>
+</ol>
+<h3 id="2-2-长短期记忆的特点"><a href="#2-2-长短期记忆的特点" class="headerlink" title="2.2 长短期记忆的特点"></a>2.2 长短期记忆的特点</h3><ol>
+<li>长期记忆和短期记忆具有不同的遗忘曲线</li>
+<li>长期记忆可以保持较长的时间</li>
+</ol>
+<h3 id="2-3-在知识追踪领域结合长短期记忆预测学生表现的现状"><a href="#2-3-在知识追踪领域结合长短期记忆预测学生表现的现状" class="headerlink" title="2.3 在知识追踪领域结合长短期记忆预测学生表现的现状"></a>2.3 在知识追踪领域结合长短期记忆预测学生表现的现状</h3><h4 id="2-3-1-现有考虑遗忘模型"><a href="#2-3-1-现有考虑遗忘模型" class="headerlink" title="2.3.1 现有考虑遗忘模型"></a>2.3.1 现有考虑遗忘模型</h4><ol>
+<li>两个BKT模型：仅部分考虑遗忘的影响因素</li>
+<li>两个回归模型，简化了遗忘的过程，不能基于之前的记忆预测表现</li>
+<li>深度学习模型：<ul>
+<li>3.1 WWW19 全面考虑遗忘影响因素</li>
+<li>3.2  <h3 id="2-4-深度学习模型的“长短期记忆”"><a href="#2-4-深度学习模型的“长短期记忆”" class="headerlink" title="2.4 深度学习模型的“长短期记忆”"></a>2.4 深度学习模型的“长短期记忆”</h3><h4 id="2-4-1-介绍现有卷积神经网络的发展史和特性"><a href="#2-4-1-介绍现有卷积神经网络的发展史和特性" class="headerlink" title="2.4.1 介绍现有卷积神经网络的发展史和特性"></a>2.4.1 介绍现有卷积神经网络的发展史和特性</h4><h4 id="2-4-2-三种改造LSTM的方法"><a href="#2-4-2-三种改造LSTM的方法" class="headerlink" title="2.4.2 三种改造LSTM的方法"></a>2.4.2 三种改造LSTM的方法</h4></li>
+</ul>
+</li>
+</ol>
+<h3 id="2-5-现有考虑遗忘模型的“长短期记忆”"><a href="#2-5-现有考虑遗忘模型的“长短期记忆”" class="headerlink" title="2.5 现有考虑遗忘模型的“长短期记忆”"></a>2.5 现有考虑遗忘模型的“长短期记忆”</h3><h4 id="2-5-1-不能考虑长期记忆和短期记忆不同的衰减率"><a href="#2-5-1-不能考虑长期记忆和短期记忆不同的衰减率" class="headerlink" title="2.5.1 不能考虑长期记忆和短期记忆不同的衰减率"></a>2.5.1 不能考虑长期记忆和短期记忆不同的衰减率</h4><h4 id="2-5-2-LSTM存储空间有限"><a href="#2-5-2-LSTM存储空间有限" class="headerlink" title="2.5.2  LSTM存储空间有限"></a>2.5.2  LSTM存储空间有限</h4><h3 id="2-6-总结"><a href="#2-6-总结" class="headerlink" title="2.6 总结"></a>2.6 总结</h3><h2 id="3-问题难度"><a href="#3-问题难度" class="headerlink" title="3. 问题难度"></a>3. 问题难度</h2><h3 id="3-1-现有考虑遗忘模型总结"><a href="#3-1-现有考虑遗忘模型总结" class="headerlink" title="3.1 现有考虑遗忘模型总结"></a>3.1 现有考虑遗忘模型总结</h3><h3 id="3-2-总结"><a href="#3-2-总结" class="headerlink" title="3.2 总结"></a>3.2 总结</h3><h2 id="4-DLD模型构建"><a href="#4-DLD模型构建" class="headerlink" title="4. DLD模型构建"></a>4. DLD模型构建</h2><h3 id="4-1-长短期记忆"><a href="#4-1-长短期记忆" class="headerlink" title="4.1 长短期记忆"></a>4.1 长短期记忆</h3><h3 id="4-2-问题难度"><a href="#4-2-问题难度" class="headerlink" title="4.2 问题难度"></a>4.2 问题难度</h3>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/08/Thinking-in-Java-Chapter-1-%E5%AF%B9%E8%B1%A1%E5%AF%BC%E8%AE%BA/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -272,10 +915,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2019-12-07 21:21:11 / Modified: 21:25:37" itemprop="dateCreated datePublished" datetime="2019-12-07T21:21:11+08:00">2019-12-07</time>
+              <time title="Created: 2019-12-07 21:21:11" itemprop="dateCreated datePublished" datetime="2019-12-07T21:21:11+08:00">2019-12-07</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-12-18 12:29:37" itemprop="dateModified" datetime="2019-12-18T12:29:37+08:00">2019-12-18</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -303,649 +952,31 @@
 <ul>
 <li>概述：</li>
 </ul>
-<h2 id="2-我的解法"><a href="#2-我的解法" class="headerlink" title="2. 我的解法"></a>2. 我的解法</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">lengthOfLongestSubstring</span><span class="params">(String s)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span>(s==<span class="keyword">null</span>||s.equals(<span class="string">""</span>)) <span class="keyword">return</span> <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> Max=<span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;s.length();i++)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=i+<span class="number">1</span>;j&lt;s.length();j++)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">            &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">if</span>(s.substring(i,j).indexOf(String.valueOf(s.charAt(j)))==-<span class="number">1</span>) </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">                    Max=(Max&gt;=(j-i+<span class="number">1</span>))?Max:(j-i)+<span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">else</span> <span class="keyword">break</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> Max;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/07/leetcode%E4%B9%8B%E6%97%85-02-%E4%B8%A4%E6%95%B0%E7%9B%B8%E5%8A%A0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="嘚嘚">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="嘚嘚的blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/12/07/leetcode%E4%B9%8B%E6%97%85-02-%E4%B8%A4%E6%95%B0%E7%9B%B8%E5%8A%A0/" class="post-title-link" itemprop="url">leetcode之旅-02-两数相加</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-12-07 20:49:05" itemprop="dateCreated datePublished" datetime="2019-12-07T20:49:05+08:00">2019-12-07</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-12-08 21:58:37" itemprop="dateModified" datetime="2019-12-08T21:58:37+08:00">2019-12-08</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode%E4%B9%8B%E6%97%85/" itemprop="url" rel="index">
-                    <span itemprop="name">leetcode之旅</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="1-题目描述"><a href="#1-题目描述" class="headerlink" title="1. 题目描述"></a>1. 题目描述</h2><p><img src="/2019/12/07/leetcode%E4%B9%8B%E6%97%85-02-%E4%B8%A4%E6%95%B0%E7%9B%B8%E5%8A%A0/两数相加.png" alt="题目描述"></p>
-<ul>
-<li><p>概述：两个逆序存储的非零开头的数字链表，求两数之和，输出也是逆序的链表</p>
-</li>
-<li><p>leetcode 01 02两个题分别考察了列表在物理存储层面的两种表示方式：<strong>数组和链表</strong> 的加法</p>
-<h2 id="2-我的解法"><a href="#2-我的解法" class="headerlink" title="2. 我的解法"></a>2. 我的解法</h2><font color="Chocolate" size="4">暴力</font>：按顺序同时遍历两个链表，按照进位规则进行加法运算，同时需要注意两个数维数不等，以及结果可能维数增加的情况
-<font color="Chocolate" size="4">我的问题是，代码太过复杂：</font>
-
-<ul>
-<li>a. 在初始化L3时，由于不是控制，需要另外计算存储值。应该设立空的表头，放到循环中值。</li>
-<li>b. 在循环之外，分别判断了当两个值不等长时的情况，可以归并到循环中，减少代码函数<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"> <span class="comment">/* Definition for singly-linked list.</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> * public class ListNode &#123;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> *     int val;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> *     ListNode next;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> *     ListNode(int x) &#123; val = x; &#125;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> * &#125;</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line"><span class="comment"> */</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">addTwoNumbers</span><span class="params">(ListNode l1, ListNode l2)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> num=l1.val+l2.val;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">        ListNode l3 =<span class="keyword">new</span> ListNode(num%<span class="number">10</span>); </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">        ListNode head=l3;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">//同时遍历两个链表</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">while</span>(l1.next!=<span class="keyword">null</span>&amp;&amp;l2.next!=<span class="keyword">null</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">        &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">            l1=l1.next;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">            l2=l2.next;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">            num=l1.val+l2.val+num/<span class="number">10</span>;<span class="comment">//加上进位</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">            l3.next=<span class="keyword">new</span> ListNode(num%<span class="number">10</span>);<span class="comment">//超出10，求余</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">            l3=l3.next;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">//如果两个链表不等长，即两个数位数不同，剩下的分别遍历</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">while</span>(l1.next!=<span class="keyword">null</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">        &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">            l1=l1.next;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">            num=l1.val+num/<span class="number">10</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">            l3.next=<span class="keyword">new</span> ListNode(num%<span class="number">10</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">            l3=l3.next;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">while</span>(l2.next!=<span class="keyword">null</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">        &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">            l2=l2.next;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">            num=l2.val+num/<span class="number">10</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line">            l3.next=<span class="keyword">new</span> ListNode(num%<span class="number">10</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line">            l3=l3.next;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">37</span></pre></td><td class="code"><pre><span class="line">        <span class="comment">//最后如果相加多出一位，别忘了加上</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">38</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span>(num/<span class="number">10</span>!=<span class="number">0</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">39</span></pre></td><td class="code"><pre><span class="line">            l3.next=<span class="keyword">new</span> ListNode(num/<span class="number">10</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">40</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> head;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">41</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">42</span></pre></td><td class="code"><pre><span class="line">		&#125;</span></pre></td></tr></table></figure></li>
-</ul>
-</li>
-<li>时间复杂度：O(max(m,n))</li>
-<li>空间复杂度： O(max(m,n))<h2 id="3-解法二"><a href="#3-解法二" class="headerlink" title="3. 解法二"></a>3. 解法二</h2>解决我的解法的问题<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ListNode</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> val;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    ListNode next;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    ListNode(<span class="keyword">int</span> x) &#123; val = x; &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> ListNode <span class="title">addTwoNumbers</span><span class="params">(ListNode l1, ListNode l2)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">    ListNode dummyHead = <span class="keyword">new</span> ListNode(<span class="number">0</span>);<span class="comment">//设置空的链表头</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    ListNode p = l1, q = l2, curr = dummyHead;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> carry = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">while</span> (p != <span class="keyword">null</span> || q != <span class="keyword">null</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> x = (p != <span class="keyword">null</span>) ? p.val : <span class="number">0</span>;<span class="comment">//当不等长时，补充相应值0</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> y = (q != <span class="keyword">null</span>) ? q.val : <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> sum = carry + x + y;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">        carry = sum / <span class="number">10</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">        curr.next = <span class="keyword">new</span> ListNode(sum % <span class="number">10</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">        curr = curr.next;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (p != <span class="keyword">null</span>) p = p.next;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span> (q != <span class="keyword">null</span>) q = q.next;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span> (carry &gt; <span class="number">0</span>) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">        curr.next = <span class="keyword">new</span> ListNode(carry);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">return</span> dummyHead.next;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure></li>
-<li><p>时空复杂度不变</p>
-<h2 id="3-扩展"><a href="#3-扩展" class="headerlink" title="3. 扩展"></a>3. 扩展</h2><p>如果链表存储的顺序反过来怎么办？<br>我首先想到的是链表先逆序计算，然后将结果再逆序呗，这就转换到我们之前的情况了。不知道还有没有其他的解法。</p>
-</li>
-<li><p>3.1 下边是单链表逆序的代码。</p>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//逆序</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">   	ListNode pre = <span class="keyword">null</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">     ListNode head = node;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">     <span class="keyword">while</span>(head!=<span class="keyword">null</span>)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">     &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">         ListNode next = head.next;<span class="comment">//保留下一个节点，防丢失</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">         head.next =pre;<span class="comment">//新head接上</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">         pre = head;<span class="comment">//pre指针指向新head</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">         head = next;<span class="comment">//原列表更换head</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">     &#125;</span></pre></td></tr></table></figure>
-<ul>
-<li>3.2 递归思路，单列表逆序<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> ListNode <span class="title">reverseListRecursion</span><span class="params">(ListNode head)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">        ListNode newHead;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span>(head==<span class="keyword">null</span>||head.next==<span class="keyword">null</span> )&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> head;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        newHead=reverseListRecursion(head.next); </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        head.next.next=head; <span class="comment">//目前的head.next指向newhead的最后一个节点</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        head.next=<span class="keyword">null</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> newHead;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr></table></figure>
-<h2 id="4-参考列表"><a href="#4-参考列表" class="headerlink" title="4. 参考列表"></a>4. 参考列表</h2></li>
-</ul>
-<ol>
-<li><a href="https://leetcode.wang/leetCode-2-Add-Two-Numbers.html" target="_blank" rel="noopener">题解-wang</a></li>
+<h2 id="2-我的解法"><a href="#2-我的解法" class="headerlink" title="2. 我的解法"></a>2. 我的解法</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">lengthOfLongestSubstring</span><span class="params">(String s)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span>(s==<span class="keyword">null</span>||s.equals(<span class="string">""</span>)) <span class="keyword">return</span> <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> Max=<span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;s.length();i++)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=i+<span class="number">1</span>;j&lt;s.length();j++)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">            &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(s.substring(i,j).indexOf(String.valueOf(s.charAt(j)))==-<span class="number">1</span>) </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">                    Max=(Max&gt;=(j-i+<span class="number">1</span>))?Max:(j-i)+<span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">else</span> <span class="keyword">break</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> Max;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
+<p>时间复杂度：最坏到达O($n^2$)</p>
+<h2 id="3-解法二"><a href="#3-解法二" class="headerlink" title="3 解法二"></a>3 解法二</h2><ol>
+<li>我的解法存在一点问题：每次第二层循环结束时j都回到i+1的位置。</li>
+<li>改进：由于之前的探索可知i-j之间存在与j位重复的字符，那么下一次循环的时候，j的位置可以固定不动，移动i至重复字符的下一位即可。</li>
 </ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/07/java-HashMap/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="嘚嘚">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="嘚嘚的blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/12/07/java-HashMap/" class="post-title-link" itemprop="url">java-HashMap</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2019-12-07 18:21:13 / Modified: 19:46:13" itemprop="dateCreated datePublished" datetime="2019-12-07T18:21:13+08:00">2019-12-07</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index">
-                    <span itemprop="name">java学习</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a>一、前言</h2><p>在<a href="https://shaoliangliang1996.github.io/2019/12/07/leetcode之旅-01-两数之和/" target="_blank" rel="noopener">leetcode-01-两数之和</a>的题目中，提到了hash table 在查找方面提高时间复杂度的表现。本片文章是对hashmap进行详细的学习。</p>
-<h2 id="二、java中其他数据结构在新增和查找方面的表现"><a href="#二、java中其他数据结构在新增和查找方面的表现" class="headerlink" title="二、java中其他数据结构在新增和查找方面的表现"></a>二、java中其他数据结构在新增和查找方面的表现</h2><ol>
-<li>数组：<ul>
-<li>1.1 无序数组：<ul>
-<li>查找：时间复杂度时O(n)</li>
-<li>新增：时间复杂度O(1)</li>
-</ul>
-</li>
-<li>1..2 有序数组<ul>
-<li>查找：使用<font color="Chocolate" size="4">二分查找，差值查找，斐波那契查找</font>等方式，可将查找复杂度提高为O(logn)。但当实际需要插入删除操作时，由于涉及到数组元素的移动，平均时间复杂度为O(n)</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>线性链表：<ul>
-<li>查找：O(n)</li>
-<li>新增: O(1) ,因为仅需引用变换，无序元素移动</li>
-</ul>
-</li>
-<li><p>二叉树：（本质：物理组织结构为链表）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">lengthOfLongestSubstring</span><span class="params">(String s)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span>(s==<span class="keyword">null</span>||s.equals(<span class="string">""</span>)) <span class="keyword">return</span> <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> Max=<span class="number">1</span> , n = s.length() , sub = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>,j=i+<span class="number">1</span> ; i&lt;n&amp;&amp;j&lt;n ;j++)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">        &#123;<span class="comment">//每次都探索新的j</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">int</span> reindex=s.substring(i,j).indexOf(s.charAt(j));</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">if</span>(reindex == -<span class="number">1</span>) </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">                Max=(Max&gt;=(j-i+<span class="number">1</span>))?Max:j-i+<span class="number">1</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">else</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">            &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">                i = sub+reindex +<span class="number">1</span>;<span class="comment">//移到重复位置的下一位</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">                sub = i;<span class="comment">//寻找i在s中移动的位置，reindex只是子字符串总的位置</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> Max;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
 <ul>
-<li>插入&amp;查找&amp;删除：O(logn)</li>
-</ul>
-</li>
-<li>哈希表：（本质：主干物理组织结构是数组）<ul>
-<li>查找：O(1)  当不存在哈希冲突时</li>
-</ul>
-</li>
-</ol>
-<h2 id="三、HashMap"><a href="#三、HashMap" class="headerlink" title="三、HashMap"></a>三、HashMap</h2><ol>
-<li><p>哈希函数和哈希冲突</p>
-<ul>
-<li><strong>HashMap利用哈希函数</strong>：hash表使用了数组的形式，当涉及到查找的时候，通过哈希函数计算的hash值，可以快速得到值对应的数组下标，定位到相应元素，时间复杂度为O(1)</li>
-<li><p><strong>解决哈希冲突</strong>：不可避免。哈希冲突的解决方案有多种:</p>
-<ul>
-<li>开放定址法（发生冲突，继续寻找下一块未被占用的存储地址）</li>
-<li>再散列函数法 ?</li>
-<li>链地址法 ?</li>
-</ul>
-<blockquote>
-<p>而HashMap即是采用了链地址法，也就是<font color="Chocolate" size="4">数组+链表</font>的方式</p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li><p>数据+链表的HashMap结构图</p>
-</li>
-</ol>
-<p><img src="/2019/12/07/java-HashMap/hashmap数组加链表结构.png" alt="hashmap数组加链表结构"></p>
-<p>数组是hashmap的主体，链表是为了解决哈希冲突。如果定位到的数组位置不含链表（当前entry的next指向null）,那么查找，添加等操作很快，仅需一次寻址即可；如果定位到的数组包含链表，对于添加操作，其时间复杂度为O(n)，首先遍历链表，存在即覆盖，否则新增；对于查找操作来讲，仍需遍历链表，然后通过key对象的equals方法逐一比对查找。所以，性能考虑，<strong>HashMap中的链表出现越少，性能才会越好。</strong></p>
-<blockquote>
-<p>之后有介绍了hashmap在不同的构造器下，新增put和查找get的具体步骤,源码解析。目前还不需要了解这么深入。待进一步学习。</p>
-</blockquote>
-<h2 id="参考列表"><a href="#参考列表" class="headerlink" title="参考列表"></a>参考列表</h2><ol>
-<li><a href="https://blog.csdn.net/woshimaxiao1/article/details/83661464" target="_blank" rel="noopener">深入浅出学Java——HashMap</a></li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/07/leetcode%E4%B9%8B%E6%97%85-01-%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="嘚嘚">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="嘚嘚的blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/12/07/leetcode%E4%B9%8B%E6%97%85-01-%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/" class="post-title-link" itemprop="url">leetcode之旅-01-两数之和</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2019-12-07 13:57:43 / Modified: 15:43:29" itemprop="dateCreated datePublished" datetime="2019-12-07T13:57:43+08:00">2019-12-07</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode%E4%B9%8B%E6%97%85/" itemprop="url" rel="index">
-                    <span itemprop="name">leetcode之旅</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="1-题目描述"><a href="#1-题目描述" class="headerlink" title="1. 题目描述"></a>1. 题目描述</h2><p><img src="/2019/12/07/leetcode%E4%B9%8B%E6%97%85-01-%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/两数之和题目.png" alt="题目描述"> </p>
-<ul>
-<li>概括：已知数组A和目标值T，在A中找到两个<font color="Chocolate" size="4"><strong>和</strong></font>为T的两个值。输出两个值的下标</li>
-<li>前提：数组中一定有解且有唯一解，不能重复利用数组元素。</li>
-</ul>
-<h2 id="2-我的解法"><a href="#2-我的解法" class="headerlink" title="2. 我的解法"></a>2. 我的解法</h2><p><font color="GoldenRod" size="4">暴力解法</font> ：双重循环，遍历数组nums，直到找到两个和为target的值，输出下标</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span>[] twoSum(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> target) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;nums.length;i++)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=i+<span class="number">1</span>;j&lt;nums.length;j++)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">                <span class="keyword">if</span>(nums[i]+nums[j]==target)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">                &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">                    <span class="keyword">return</span> <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;i,j&#125;;<span class="comment">//快速建立数组方法</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">                &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;<span class="number">0</span>,<span class="number">0</span>&#125;;<span class="comment">//若没找到，就随便输出两个值，应该不可能有这种情况</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">            </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr></table></figure>
-<ul>
-<li>时间复杂度：O（ <script type="math/tex">n^2</script>）</li>
-<li>空间复杂度： O（1）</li>
-</ul>
-<h2 id="3-解法二"><a href="#3-解法二" class="headerlink" title="3. 解法二"></a>3. 解法二</h2><p><font color="GoldenRod" size="4">充分利用hash table</font>  ：</p>
-<ul>
-<li><p>原解法：在我的解法的第二层循环主要是为了找到一个值，使两值相加为target。这个值可以理解为sub = target - nums[i]。第二层循环的时间复杂度为O(n)。</p>
-</li>
-<li><p>新解法：利用哈希表可以避免循环，直接找到列表中某个值的特性，把数组的每个元素保存为 hash 的 key，下标保存为 hash 的 value ，这样只需判断 sub 在不在 hash 的 key 里就可以了。可使第二层时间复杂度将为O(1)。</p>
-<blockquote>
-<p>注意需判断哈希表找到的值是否和第一重循环找到的值相同，即 i = j</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">int</span>[] twoSum(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> target) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">  	<span class="comment">//建立hash table</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    Map&lt;Integer,Integer&gt; map=<span class="keyword">new</span> HashMap&lt;&gt;();</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;nums.length;i++)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        map.put(nums[i],i);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">  	<span class="comment">//只需一重循环便可找到两个值</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;nums.length;i++)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> sub=target-nums[i];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">      	<span class="comment">//需判断找到的值是否是i</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span>(map.containsKey(sub)&amp;&amp;map.get(sub)!=i)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;i,map.get(sub)&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"No two sum solution"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure></blockquote>
-</li>
 <li>时间复杂度：O(n)</li>
-<li>空间复杂度： O(n)   <strong>空间换时间</strong></li>
 </ul>
-<h2 id="3-解法三"><a href="#3-解法三" class="headerlink" title="3. 解法三"></a>3. 解法三</h2><p><font color="GoldenRod" size="4">算法二的简化版</font>  ：不需要判断hash找到的值是否与第一个值相同。复杂度不变。相当于在一重循环中，<strong>不断往前找hash值</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">int</span>[] twoSum(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> target) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    Map&lt;Integer,Integer&gt; map=<span class="keyword">new</span> HashMap&lt;&gt;();<span class="comment">//hash无需提前加入</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;nums.length;i++)&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> sub=target-nums[i];</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">if</span>(map.containsKey(sub))&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;i,map.get(sub)&#125;;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">        map.put(nums[i], i);<span class="comment">//无需判断重复，因判断时当前值还没加入</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"No two sum solution"</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>hash table 的利用，在一维列表中减少时间复杂度，直接查找某个值非常方便</p>
-<h2 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h2><h3 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h3><p>利用如下代码创建hashmap，自动根据建立相应key值的hash值。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">Map&lt;Integer,Integer&gt; map=<span class="keyword">new</span> HashMap&lt;&gt;()</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">map.put(nums[i],i)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"><span class="comment">//通过key值查找列表位置，隐藏了key值转换hash值，及hash对应的过程</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">map.containsKey(sub)<span class="comment">//判断是否含有key值</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">map.get(sub)<span class="comment">//去除该key值的索引号（下标）</span></span></pre></td></tr></table></figure></p>
-<blockquote>
-<p>hashmap的使用还待之后进一步总结</p>
-</blockquote>
-<h2 id="参考列表"><a href="#参考列表" class="headerlink" title="参考列表"></a>参考列表</h2><ol>
-<li><a href="https://leetcode-cn.com/problems/two-sum/" target="_blank" rel="noopener">leetcode-两数之和</a></li>
-<li><a href="https://leetcode.wang/leetCode-1-Two-Sum.html" target="_blank" rel="noopener">解决方案-wang</a></li>
-<li><a href="https://blog.csdn.net/woshimaxiao1/article/details/83661464" target="_blank" rel="noopener">扩展-深入浅出学Java——HashMap</a></li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/06/%E5%B7%A5%E4%BD%9C%E8%B0%83%E7%A0%94/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="嘚嘚">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="嘚嘚的blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/12/06/%E5%B7%A5%E4%BD%9C%E8%B0%83%E7%A0%94/" class="post-title-link" itemprop="url">工作调研</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-12-06 21:11:41" itemprop="dateCreated datePublished" datetime="2019-12-06T21:11:41+08:00">2019-12-06</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-12-07 11:54:49" itemprop="dateModified" datetime="2019-12-07T11:54:49+08:00">2019-12-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/B%E7%AB%99%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index">
-                    <span itemprop="name">B站学习</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>[TOC]</p>
-<h2 id="美剧推荐"><a href="#美剧推荐" class="headerlink" title="美剧推荐"></a>美剧推荐</h2><ol>
-<li>《绝望主妇》 — 《致命女人》</li>
-<li>摩登家族</li>
-</ol>
-<h2 id="一、程序员学长谈9月校招找工作制胜之道！全是拿分题哦！"><a href="#一、程序员学长谈9月校招找工作制胜之道！全是拿分题哦！" class="headerlink" title="一、程序员学长谈9月校招找工作制胜之道！全是拿分题哦！"></a>一、程序员学长谈9月校招找工作制胜之道！全是拿分题哦！</h2><h3 id="1-信息获取渠道"><a href="#1-信息获取渠道" class="headerlink" title="1. 信息获取渠道"></a>1. 信息获取渠道</h3><ul>
-<li>1.1 牛客网</li>
-<li>1.2 百度，网易，bilibili官网网站</li>
-</ul>
-<h3 id="2-技术学习（重要性按顺序）"><a href="#2-技术学习（重要性按顺序）" class="headerlink" title="2. 技术学习（重要性按顺序）"></a>2. 技术学习（重要性按顺序）</h3><ul>
-<li><p>2.1 基础知识</p>
+<h2 id="4-解法四"><a href="#4-解法四" class="headerlink" title="4 解法四"></a>4 解法四</h2><p>巧用hashmap。<br>采用i跳跃的方式，维护hashmap中的键值对。</p>
 <ul>
-<li>数据结构和算法——最重要</li>
-<li>一门编程语言——语言的细节和机制的原理</li>
-<li>计算机网络——协议的细节</li>
-<li>操作系统——只需了解基础原理和概念，如内存置换，线程调度，磁盘原理</li>
-<li>数据库——SQL，如索引的基本原理等等</li>
+<li>如果没有重复字符，则向map中加入新的j位置的字符，value值为如果发生重复，i需要跳转到的位置。其实也是不断更新对应字符的下一次跳转位置。</li>
+<li>如果发生重复，i跳转的规则是取当前位置和重复字符所在位置的下一个位置的最大值。因为map在去字串时没有删除之前的字符。这样做的目的是为了防止，当前重复的字符其实并没有包含在当前字串中，而是之前遗留的字符，防止i倒退。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">lengthOfLongestSubstring</span><span class="params">(String s)</span> </span>&#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">int</span> n = s.length(), ans = <span class="number">0</span>;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line">        Map&lt;Character, Integer&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;(); </span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>, i = <span class="number">0</span>; j &lt; n; j++) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line">            <span class="keyword">if</span> (map.containsKey(s.charAt(j))) &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">                i = Math.max(map.get(s.charAt(j)), i); <span class="comment">//采用i跳跃</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">            &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line">            ans = Math.max(ans, j - i + <span class="number">1</span>);</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">            map.put(s.charAt(j), j + <span class="number">1</span>);<span class="comment">//下标 + 1 代表 i 要移动的下个位置</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line">        &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">        <span class="keyword">return</span> ans;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">    &#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr></table></figure></li>
+<li>时间复杂度：O(n)</li>
+<li>空间复杂度：O(m)</li>
 </ul>
-</li>
-<li><p>2.2  项目经验</p>
-</li>
-<li>2.3  实习经验</li>
-</ul>
-<h3 id="3-公司"><a href="#3-公司" class="headerlink" title="3. 公司"></a>3. 公司</h3><ul>
-<li>3.1  技术公司，BAT，等互联网公司</li>
-<li>3.2  银行，铁路，移动，国家机关和事业单位</li>
-</ul>
-<h3 id="4-心态调整"><a href="#4-心态调整" class="headerlink" title="4. 心态调整"></a>4. 心态调整</h3><h2 id="4-1-运气"><a href="#4-1-运气" class="headerlink" title="- 4.1. 运气"></a>- 4.1. 运气</h2><h2 id="二、github使用"><a href="#二、github使用" class="headerlink" title="二、github使用"></a>二、github使用</h2><h2 id="1-掌握git，使用git管理自己的代码，整理git的命令"><a href="#1-掌握git，使用git管理自己的代码，整理git的命令" class="headerlink" title="1. 掌握git，使用git管理自己的代码，整理git的命令"></a>1. 掌握git，使用git管理自己的代码，整理git的命令</h2><h2 id="三、视频演示如何玩转一个开源项目｜如何运行-如何读代码｜顺便讲讲IDEA和Springboot"><a href="#三、视频演示如何玩转一个开源项目｜如何运行-如何读代码｜顺便讲讲IDEA和Springboot" class="headerlink" title="三、视频演示如何玩转一个开源项目｜如何运行+如何读代码｜顺便讲讲IDEA和Springboot"></a>三、视频演示如何玩转一个开源项目｜如何运行+如何读代码｜顺便讲讲IDEA和Springboot</h2><ol>
-<li>首先讲解了几个java的开源项目 </li>
-<li>介绍在intelliJ IDEA 运行“目前最完美的博客”halo项目的运行，讲解IDEA的基本操作</li>
-</ol>
-<hr>
-<h2 id="四、学技术真有那么费劲？我的学习秘诀大公开！在职程序员聊聊该如何学习技术以及如何掌握一门新技术。"><a href="#四、学技术真有那么费劲？我的学习秘诀大公开！在职程序员聊聊该如何学习技术以及如何掌握一门新技术。" class="headerlink" title="四、学技术真有那么费劲？我的学习秘诀大公开！在职程序员聊聊该如何学习技术以及如何掌握一门新技术。"></a>四、学技术真有那么费劲？我的学习秘诀大公开！在职程序员聊聊该如何学习技术以及如何掌握一门新技术。</h2><ol>
-<li>认知，了解（第一印象）。<ul>
-<li>如springboot是干什么的，解决什么问题</li>
-<li>同类的技术有哪些，如Web后端常用技术框架为Spring Boot（java），beego（Go），flask、diango（python），thinkphp（PHP）</li>
-<li><strong>了解该技术的重要组成部分</strong>，如Spring框架：IOC容器，AOP切面</li>
-<li>思考一下该技术为什么会出现</li>
-</ul>
-</li>
-<li><strong>学语法，学用法</strong><br> 在买书看之前做的事情：<ul>
-<li>途径1:     视频教程</li>
-<li>途径2: 快速上手视频</li>
-<li>看别人写的入门博客</li>
-<li>买书看</li>
-<li>官方文档<blockquote>
-<p>在这个过程中多思考，提炼，总结，<strong>写博客</strong></p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li><strong>局部的练习，小型实战，环境搭建</strong><br>如书中例子，官网示例，实战demo，如作者开源的一个github库有很多学习Springboot的小demo<blockquote>
-<p>注意：遇到坑及时记录。多写博客</p>
-</blockquote>
-</li>
-<li><strong>上手实际项目或开源项目</strong>。基础牢固，包括网络知识，数据结构。作者介绍了很多的Java，c和公众号中的python开源项目</li>
-<li><strong>造轮子，手撸源码</strong></li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/04/hello/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="嘚嘚">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="嘚嘚的blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/12/04/hello/" class="post-title-link" itemprop="url">Typora使用tips</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-12-04 23:14:16" itemprop="dateCreated datePublished" datetime="2019-12-04T23:14:16+08:00">2019-12-04</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-12-06 19:16:52" itemprop="dateModified" datetime="2019-12-06T19:16:52+08:00">2019-12-06</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%BB%BA%E7%AB%8B%E5%8D%9A%E5%AE%A2/" itemprop="url" rel="index">
-                    <span itemprop="name">建立博客</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h2><ol>
-<li><p>用# ## ### 区分标题一共六级，[toc]做目录</p>
-</li>
-<li><blockquote>
-<p>为引用<br>可以多集嵌套</p>
-</blockquote>
-</li>
-<li><p><em>斜体</em>  ，<strong>加粗</strong> <del>删除线</del> 双波浪实现</p>
-</li>
-<li><p>表情符号 :happy: :cry:</p>
-<p>—-    分割线</p>
-<p>表格</p>
-<p>| nishi | wo   |<br>| :—— | :—- |<br>| 2     | 3    |</p>
-</li>
-<li><p><a href="http://baidu.com" target="_blank" rel="noopener">超链接</a></p>
-</li>
-<li><p>用 <script type="math/tex">a_i</script>打出LaTex数学公式</p>
-</li>
-<li><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">functiong</span><span class="params">()</span>:</span></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"><span class="keyword">pass</span></span></pre></td></tr></table></figure>
+<h2 id="更多解法，看题解"><a href="#更多解法，看题解" class="headerlink" title="更多解法，看题解"></a>更多解法，看题解</h2><h2 id="5-扩展"><a href="#5-扩展" class="headerlink" title="5. 扩展"></a>5. 扩展</h2><h3 id="5-1-Java-String-valueOf-Method"><a href="#5-1-Java-String-valueOf-Method" class="headerlink" title="5.1 Java - String valueOf() Method"></a>5.1 Java - String valueOf() Method</h3><p><img src="/2019/12/07/leetcode%E4%B9%8B%E6%97%85-03-%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2/Java String valueOf(" alt="题目描述"> Method .png)<br>这个方法的作用就是将其他的类型转化为string的形式，包括将boolean    char    char[]    doubel    float    int    long    Object</p>
+<h3 id="5-2-Java-String-indexOf"><a href="#5-2-Java-String-indexOf" class="headerlink" title="5.2 Java String indexOf()"></a>5.2 Java String indexOf()</h3><p>返回输入文本的在string中的下标</p>
 <ol>
-<li></li>
+<li>输入一个char，输出该char在字符串中对应的下标<br><img src="/2019/12/07/leetcode%E4%B9%8B%E6%97%85-03-%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2/String indexOf(" alt="题目描述">1.png)</li>
+<li>输入插入和你strt值，从字符串的strt位置开始查找输入的字符第一次出现的下标<br><img src="/2019/12/07/leetcode%E4%B9%8B%E6%97%85-03-%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2/String indexOf(" alt="题目描述">2.png)</li>
+<li>可以查找substring 对应的下标的方法<br><img src="/2019/12/07/leetcode%E4%B9%8B%E6%97%85-03-%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2/String indexOf(" alt="题目描述">3.png)</li>
+<li>可以从指定位置开始查找substring，输出下标<br><img src="/2019/12/07/leetcode%E4%B9%8B%E6%97%85-03-%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2/String indexOf(" alt="题目描述">4.png)</li>
 </ol>
-<ul>
-<li>nihao</li>
-<li>wo</li>
-</ul>
-</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/04/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="嘚嘚">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="嘚嘚的blog">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/12/04/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-12-04 22:31:08" itemprop="dateCreated datePublished" datetime="2019-12-04T22:31:08+08:00">2019-12-04</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-12-05 10:40:47" itemprop="dateModified" datetime="2019-12-05T10:40:47+08:00">2019-12-05</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<p>Quick Start</p>
-<h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ hexo server</span></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ hexo generate</span></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
 
       
     </div>
@@ -964,6 +995,9 @@
   </div>
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+  </nav>
 
 
 
@@ -1008,20 +1042,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-count">16</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-count">18</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

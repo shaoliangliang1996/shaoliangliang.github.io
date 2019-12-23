@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://yoursite.com').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="KDD18 Neural Memory Streaming Recommender Networks with Adversarial Training摘要  随着各种社交媒体和电子商务平台的日益普及，大量的用户行为数据（例如，用户交易数据，评级和评论数据）以前所未有的且不断增长的规模持续生成。研究具有流数据输入的推荐器系统更为现实和实用。用户生成的流数据呈现出独特的属性，例如时间排序，连续和高速">
+<meta property="og:type" content="article">
+<meta property="og:title" content="# KDD18 Neural Memory Streaming Recommender Networks with Adversarial Training">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;18&#x2F;#%20KDD18%20Neural%20Memory%20Streaming%20Recommender%20Networks%20with%20Adversarial%20Training&#x2F;index.html">
+<meta property="og:site_name" content="嘚嘚的blog">
+<meta property="og:description" content="KDD18 Neural Memory Streaming Recommender Networks with Adversarial Training摘要  随着各种社交媒体和电子商务平台的日益普及，大量的用户行为数据（例如，用户交易数据，评级和评论数据）以前所未有的且不断增长的规模持续生成。研究具有流数据输入的推荐器系统更为现实和实用。用户生成的流数据呈现出独特的属性，例如时间排序，连续和高速">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-12-18T06:15:04.217Z">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2019/12/18/#%20KDD18%20Neural%20Memory%20Streaming%20Recommender%20Networks%20with%20Adversarial%20Training/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title># KDD18 Neural Memory Streaming Recommender Networks with Adversarial Training | 嘚嘚的blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">嘚嘚的blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/18/#%20KDD18%20Neural%20Memory%20Streaming%20Recommender%20Networks%20with%20Adversarial%20Training/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="嘚嘚">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="嘚嘚的blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          # KDD18 Neural Memory Streaming Recommender Networks with Adversarial Training
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2019-12-18 09:32:50 / Modified: 14:15:04" itemprop="dateCreated datePublished" datetime="2019-12-18T09:32:50+08:00">2019-12-18</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="KDD18-Neural-Memory-Streaming-Recommender-Networks-with-Adversarial-Training"><a href="#KDD18-Neural-Memory-Streaming-Recommender-Networks-with-Adversarial-Training" class="headerlink" title="KDD18 Neural Memory Streaming Recommender Networks with Adversarial Training"></a>KDD18 Neural Memory Streaming Recommender Networks with Adversarial Training</h1><h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>  随着各种社交媒体和电子商务平台的日益普及，大量的用户行为数据（例如，用户交易数据，评级和评论数据）以前所未有的且不断增长的规模持续生成。研究具有流数据输入的推荐器系统更为现实和实用。<strong>用户生成的流数据呈现出独特的属性，例如时间排序，连续和高速</strong>，这对曾经非常成功的推荐技术提出了巨大的新挑战。尽管最近已经基于循环神经模型开发了一些时间或顺序推荐器模型，<strong>但由于它们的短期记忆和捕获用户信息的能力有限</strong>，因此它们大多数只能应用于基于会话的推荐方案。长期稳定的利益。在本文中，<strong>我们提出了一种基于神经记忆网络和外部记忆的流式推荐模型，以统一的方式捕获和存储长期稳定利益和短期动态利益。开发了一种基于生成对抗网络（GAN）的自适应负采样框架，以优化我们提出的流推荐模型，</strong>有效地克服了传统的负采样方法的局限性，并提高了模型参数推断的有效性。在两个大型推荐数据集上进行了广泛的实验，实验结果表明了我们提出的模型在流推荐场景中的优越性。</p>
+<h2 id="introduction"><a href="#introduction" class="headerlink" title="introduction"></a>introduction</h2><p>  亚马逊，netflix等很多公司依靠推荐系统推荐用户可能消费的媒体内容或产品的能力，获取利润。个性化推荐在现代生活总占有很大的比重<br>  虽然推荐系统吸引了大量研究兴趣，但流式推荐系统的子区域仍未开发。诸如Amazon和Netflix之类的现实世界社交媒体和电子商务平台以前所未有的速度生成了大量的用户项目交互数据（即用户行为数据）。例如，在2017年11月11日的光棍节购物活动中，阿里巴巴进行了近15亿笔交易[30]。此类数据是按时间排序，连续，高速且随时间变化的，这决定了推荐系统中数据的流式传输性质。因此，使用流数据框架研究推荐器系统更为实用。实时流设置对常规推荐器系统提出了巨大的挑战，其中大多数推荐器是为静态设置设计的，并通过批处理学习技术来实现，在处理流情况时，它们通常具有以下缺点：1）重新运行批处理模型所花费的时间导致模型更新延迟； 2）在存在流数据的情况下无法跟踪快速变化的趋势（例如，用户偏好和商品受欢迎程度）； 3）显式存储所有历史数据的大量内存开销。<br>  由于推荐系统本质上是一个增量过程，因此已经采用或开发了一些基于随机梯度下降（SGD）和粒子过滤器[11，54]的在线学习技术来支持流式推荐。但是，它们遭受“短期记忆”的问题，即，由于更新这些模型的算法仅基于最新的数据点，并且不考虑过去的观察结果，因此模型很快就忘记了在早期阶段学到的模式。基于这些在线学习算法的推荐模型无法捕获用户的长期稳定兴趣。最近，提出了一种基于循环神经模型的推荐系统[17，49]来解决流推荐问题，该系统采用递归神经网络（RNN）或长短期记忆（LSTM）来捕获和存储交互项的顺序模式或用户的动态兴趣。这样的模型学习输入数据的连续和表示，并在每个步骤中跨整个存储单元执行全局更新。这些体系结构设计鼓励RNN / LSTM从数据中捕获顺序模式，这使得基于RNN / LSTM的推荐系统特别擅长捕获顺序用户活动模式或用户时间动态。它们通常应用于没有用户资料（即用户的历史互动数据）的基于会话的推荐方案。但是，像在线学习算法一样，RNN / LSTM在建模和捕获用户的长期稳定兴趣方面也有局限性，而这些兴趣几乎不受时间因素的影响。作者认为用户的兴趣几乎不受时间的影响。<br>  为此，我们提出了一种名为神经记忆推荐网络（NMRN）的新型模型。 NMRN受神经图灵机（NTM）[14]和内存网络（NemNN）[37]的启发，由两个主要组件组成：增强的存储用户和商品信息的存储器，以及与用户活动数据交互并读取或读取数据的控制器网络。写的回忆。具有外部存储器的增强控制器网络将存储和处理信息的任务分开，并使网络仅专注于处理存储在其外部的信息。它还增加了存储知识的能力，因此，如有必要，用户的长期和稳定偏好可以保持不变。而且，NMRN可以像物理计算机一样按需灵活，明确地读取和写入存储器。 NMRN鼓励在内存中进行本地更改，而这种直接对内部内存执行本地更新的功能使NMRN能够强大地集成用户最近的交互数据并捕获其新出现的兴趣。<br>  具体而言，NMRN的外部存储器由密钥存储器和值存储器组成。键值存储网络（KV-MemNN）[26，57]的结构使原始的MemNN更适合处理成对数据。给定一个新的用户项交互对（u，v）实时到达系统后，NMRN首先从密钥存储器中生成一个由u激活的软地址。解决过程的灵感来自于注意力机制的最新进展，这种进展在计算机视觉[27，51]和NLP [23，59]领域很流行，但在推荐系统领域却很少研究。推荐器系统中应用的警告机制对于提高检索准确性和模型可解释性很有用。我们的注意力设计的基本思想是学习密钥存储器中的加权表示，然后通过Softmax函数作为软地址将其转换为概率分布。然后，NMRN基于软地址从值存储器中读取数据，从而得出一个既代表长期稳定的矢量</p>
+<p>  由于未观察到的样本数量非常多，我们采用[24]中提出的负采样方法来提高训练效率。大多数现有的否定抽样方法都使用随机抽样[1，24，38]或基于流行度的抽样策略[5，11]。但是，在这些抽样策略中生成的大多数负面示例可以很容易地与观察到的示例区分开，并且对培训的贡献很小，因为被抽样的项目可能与目标用户完全无关。此外，这些采样方法的适应性不足以生成对抗性负面示例，因为（1）它们是静态的，因此没有考虑到用户与某项之间的估计相似度或接近度在学习过程中会发生变化。例如，用户u和采样的噪声项v之间的相似度在一开始就很高，但是经过几个梯度下降步骤后，相似度就很低； （2）这些采样器是全局采样器，无法反映噪声项的信息量。特定用户。有鉴于此，我们基于生殖对抗网络（GAN）开发了一种自适应噪声采样器[13]来优化我们的模型，该模型同时考虑了特定用户和模型参数的当前值，以自适应地生成“困难”和infor -负面例子。此外，为了同时捕获用户和项目之间的一阶相似度以及用户之间和项目之间的二阶相似度以学习用户和项目的鲁棒表示，我们采用欧氏距离来度量用户之间的相似度灵感来自[19]的产品，而不是广泛采用的点积。<br>2468<br>2<br>总体而言，我们总结了本文的主要贡献：</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/12/14/#%20DLD%E6%A8%A1%E5%9E%8B%E6%80%BB%E7%BB%93/" rel="prev" title="# DLD模型总结">
+      <i class="fa fa-chevron-left"></i> # DLD模型总结
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/12/18/leetcode%E4%B9%8B%E6%97%85-05-%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%97%E4%B8%B2/" rel="next" title="leetcode之旅-05-最长回文字串">
+      leetcode之旅-05-最长回文字串 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#KDD18-Neural-Memory-Streaming-Recommender-Networks-with-Adversarial-Training"><span class="nav-number">1.</span> <span class="nav-text">KDD18 Neural Memory Streaming Recommender Networks with Adversarial Training</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#摘要"><span class="nav-number">1.1.</span> <span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#introduction"><span class="nav-number">1.2.</span> <span class="nav-text">introduction</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="嘚嘚"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">嘚嘚</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">嘚嘚</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.6.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

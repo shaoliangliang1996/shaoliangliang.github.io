@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://yoursite.com').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.6.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="DLD模型总结1. DLD 综述我将知识追踪的过程分为两阶段。  1  第一阶段：根据学生的做题序列，追踪学生的知识状态。——遗忘 2  第二阶段：根据知识状态结合题目，预测学生表现。——题目难度  在阶段一中，遗忘往往伴随着学习出现。经典的艾宾浩斯遗忘曲线阐述了遗忘过程的不规律性，备受推崇的艾宾浩斯学习法更是推荐学习者重复练习，巩固知识，使短期记忆转化为长期记忆。长短期记忆共同影响着学生的学习效">
+<meta property="og:type" content="article">
+<meta property="og:title" content="# DLD模型总结">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;14&#x2F;#%20DLD%E6%A8%A1%E5%9E%8B%E6%80%BB%E7%BB%93&#x2F;index.html">
+<meta property="og:site_name" content="嘚嘚的blog">
+<meta property="og:description" content="DLD模型总结1. DLD 综述我将知识追踪的过程分为两阶段。  1  第一阶段：根据学生的做题序列，追踪学生的知识状态。——遗忘 2  第二阶段：根据知识状态结合题目，预测学生表现。——题目难度  在阶段一中，遗忘往往伴随着学习出现。经典的艾宾浩斯遗忘曲线阐述了遗忘过程的不规律性，备受推崇的艾宾浩斯学习法更是推荐学习者重复练习，巩固知识，使短期记忆转化为长期记忆。长短期记忆共同影响着学生的学习效">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-12-14T04:49:17.635Z">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2019/12/14/#%20DLD%E6%A8%A1%E5%9E%8B%E6%80%BB%E7%BB%93/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title># DLD模型总结 | 嘚嘚的blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">嘚嘚的blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/14/#%20DLD%E6%A8%A1%E5%9E%8B%E6%80%BB%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="嘚嘚">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="嘚嘚的blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          # DLD模型总结
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-12-14 12:49:17" itemprop="dateCreated datePublished" datetime="2019-12-14T12:49:17+08:00">2019-12-14</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="DLD模型总结"><a href="#DLD模型总结" class="headerlink" title="DLD模型总结"></a>DLD模型总结</h1><h2 id="1-DLD-综述"><a href="#1-DLD-综述" class="headerlink" title="1. DLD 综述"></a>1. DLD 综述</h2><p>我将知识追踪的过程分为两阶段。</p>
+<ul>
+<li>1  第一阶段：根据学生的做题序列，追踪学生的知识状态。——遗忘</li>
+<li>2  第二阶段：根据知识状态结合题目，预测学生表现。——题目难度</li>
+</ul>
+<p>在阶段一中，遗忘往往伴随着学习出现。经典的艾宾浩斯遗忘曲线阐述了遗忘过程的不规律性，备受推崇的艾宾浩斯学习法更是推荐学习者重复练习，巩固知识，使短期记忆转化为长期记忆。长短期记忆共同影响着学生的学习效果，影响未来的表现。<br>在阶段二中，学生表现不仅与知识熟练度有关，也和题目难度有关，题目包含知识点，进一步可以得出，与知识点的难度有关。知识点的难度又与题目考查的知识的深度和知识点本身的难度有关。</p>
+<h2 id="2-长短期记忆（遗忘）"><a href="#2-长短期记忆（遗忘）" class="headerlink" title="2. 长短期记忆（遗忘）"></a>2. 长短期记忆（遗忘）</h2><h3 id="2-1-想法启发"><a href="#2-1-想法启发" class="headerlink" title="2.1 想法启发"></a>2.1 想法启发</h3><p>在推荐系统领域存在长期兴趣和短期兴趣的问题。四篇论文总结。</p>
+<ol>
+<li>IJCAI17 time-lstm：在根据用户的历史行为数据，推荐物品。作者认为，用户具有长期兴趣，以及用户上一时刻访问的物品，在短时间内对下一时刻访问的物品影响较大，也就是短期兴趣。</li>
+</ol>
+<h3 id="2-2-长短期记忆的特点"><a href="#2-2-长短期记忆的特点" class="headerlink" title="2.2 长短期记忆的特点"></a>2.2 长短期记忆的特点</h3><ol>
+<li>长期记忆和短期记忆具有不同的遗忘曲线</li>
+<li>长期记忆可以保持较长的时间</li>
+</ol>
+<h3 id="2-3-在知识追踪领域结合长短期记忆预测学生表现的现状"><a href="#2-3-在知识追踪领域结合长短期记忆预测学生表现的现状" class="headerlink" title="2.3 在知识追踪领域结合长短期记忆预测学生表现的现状"></a>2.3 在知识追踪领域结合长短期记忆预测学生表现的现状</h3><h4 id="2-3-1-现有考虑遗忘模型"><a href="#2-3-1-现有考虑遗忘模型" class="headerlink" title="2.3.1 现有考虑遗忘模型"></a>2.3.1 现有考虑遗忘模型</h4><ol>
+<li>两个BKT模型：仅部分考虑遗忘的影响因素</li>
+<li>两个回归模型，简化了遗忘的过程，不能基于之前的记忆预测表现</li>
+<li>深度学习模型：<ul>
+<li>3.1 WWW19 全面考虑遗忘影响因素</li>
+<li>3.2  <h3 id="2-4-深度学习模型的“长短期记忆”"><a href="#2-4-深度学习模型的“长短期记忆”" class="headerlink" title="2.4 深度学习模型的“长短期记忆”"></a>2.4 深度学习模型的“长短期记忆”</h3><h4 id="2-4-1-介绍现有卷积神经网络的发展史和特性"><a href="#2-4-1-介绍现有卷积神经网络的发展史和特性" class="headerlink" title="2.4.1 介绍现有卷积神经网络的发展史和特性"></a>2.4.1 介绍现有卷积神经网络的发展史和特性</h4><h4 id="2-4-2-三种改造LSTM的方法"><a href="#2-4-2-三种改造LSTM的方法" class="headerlink" title="2.4.2 三种改造LSTM的方法"></a>2.4.2 三种改造LSTM的方法</h4></li>
+</ul>
+</li>
+</ol>
+<h3 id="2-5-现有考虑遗忘模型的“长短期记忆”"><a href="#2-5-现有考虑遗忘模型的“长短期记忆”" class="headerlink" title="2.5 现有考虑遗忘模型的“长短期记忆”"></a>2.5 现有考虑遗忘模型的“长短期记忆”</h3><h4 id="2-5-1-不能考虑长期记忆和短期记忆不同的衰减率"><a href="#2-5-1-不能考虑长期记忆和短期记忆不同的衰减率" class="headerlink" title="2.5.1 不能考虑长期记忆和短期记忆不同的衰减率"></a>2.5.1 不能考虑长期记忆和短期记忆不同的衰减率</h4><h4 id="2-5-2-LSTM存储空间有限"><a href="#2-5-2-LSTM存储空间有限" class="headerlink" title="2.5.2  LSTM存储空间有限"></a>2.5.2  LSTM存储空间有限</h4><h3 id="2-6-总结"><a href="#2-6-总结" class="headerlink" title="2.6 总结"></a>2.6 总结</h3><h2 id="3-问题难度"><a href="#3-问题难度" class="headerlink" title="3. 问题难度"></a>3. 问题难度</h2><h3 id="3-1-现有考虑遗忘模型总结"><a href="#3-1-现有考虑遗忘模型总结" class="headerlink" title="3.1 现有考虑遗忘模型总结"></a>3.1 现有考虑遗忘模型总结</h3><h3 id="3-2-总结"><a href="#3-2-总结" class="headerlink" title="3.2 总结"></a>3.2 总结</h3><h2 id="4-DLD模型构建"><a href="#4-DLD模型构建" class="headerlink" title="4. DLD模型构建"></a>4. DLD模型构建</h2><h3 id="4-1-长短期记忆"><a href="#4-1-长短期记忆" class="headerlink" title="4.1 长短期记忆"></a>4.1 长短期记忆</h3><h3 id="4-2-问题难度"><a href="#4-2-问题难度" class="headerlink" title="4.2 问题难度"></a>4.2 问题难度</h3>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/12/08/Thinking-in-Java-Chapter-1-%E5%AF%B9%E8%B1%A1%E5%AF%BC%E8%AE%BA/" rel="prev" title="Thinking-in-Java-Chapter-1-对象导论">
+      <i class="fa fa-chevron-left"></i> Thinking-in-Java-Chapter-1-对象导论
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/12/18/#%20KDD18%20Neural%20Memory%20Streaming%20Recommender%20Networks%20with%20Adversarial%20Training/" rel="next" title="# KDD18 Neural Memory Streaming Recommender Networks with Adversarial Training">
+      # KDD18 Neural Memory Streaming Recommender Networks with Adversarial Training <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#DLD模型总结"><span class="nav-number">1.</span> <span class="nav-text">DLD模型总结</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-DLD-综述"><span class="nav-number">1.1.</span> <span class="nav-text">1. DLD 综述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-长短期记忆（遗忘）"><span class="nav-number">1.2.</span> <span class="nav-text">2. 长短期记忆（遗忘）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-想法启发"><span class="nav-number">1.2.1.</span> <span class="nav-text">2.1 想法启发</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-长短期记忆的特点"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.2 长短期记忆的特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-在知识追踪领域结合长短期记忆预测学生表现的现状"><span class="nav-number">1.2.3.</span> <span class="nav-text">2.3 在知识追踪领域结合长短期记忆预测学生表现的现状</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-1-现有考虑遗忘模型"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">2.3.1 现有考虑遗忘模型</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-深度学习模型的“长短期记忆”"><span class="nav-number">1.2.4.</span> <span class="nav-text">2.4 深度学习模型的“长短期记忆”</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-1-介绍现有卷积神经网络的发展史和特性"><span class="nav-number">1.2.4.1.</span> <span class="nav-text">2.4.1 介绍现有卷积神经网络的发展史和特性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-2-三种改造LSTM的方法"><span class="nav-number">1.2.4.2.</span> <span class="nav-text">2.4.2 三种改造LSTM的方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-现有考虑遗忘模型的“长短期记忆”"><span class="nav-number">1.2.5.</span> <span class="nav-text">2.5 现有考虑遗忘模型的“长短期记忆”</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-5-1-不能考虑长期记忆和短期记忆不同的衰减率"><span class="nav-number">1.2.5.1.</span> <span class="nav-text">2.5.1 不能考虑长期记忆和短期记忆不同的衰减率</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-5-2-LSTM存储空间有限"><span class="nav-number">1.2.5.2.</span> <span class="nav-text">2.5.2  LSTM存储空间有限</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-6-总结"><span class="nav-number">1.2.6.</span> <span class="nav-text">2.6 总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-问题难度"><span class="nav-number">1.3.</span> <span class="nav-text">3. 问题难度</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-现有考虑遗忘模型总结"><span class="nav-number">1.3.1.</span> <span class="nav-text">3.1 现有考虑遗忘模型总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-总结"><span class="nav-number">1.3.2.</span> <span class="nav-text">3.2 总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-DLD模型构建"><span class="nav-number">1.4.</span> <span class="nav-text">4. DLD模型构建</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-长短期记忆"><span class="nav-number">1.4.1.</span> <span class="nav-text">4.1 长短期记忆</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-问题难度"><span class="nav-number">1.4.2.</span> <span class="nav-text">4.2 问题难度</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="嘚嘚"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">嘚嘚</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">嘚嘚</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.6.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
